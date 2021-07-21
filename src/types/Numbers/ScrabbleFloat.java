@@ -27,4 +27,9 @@ public class ScrabbleFloat extends AbstractType {
     public String toString() {
         return String.valueOf(d);
     }
+
+    @Override
+    public ScrabbleString stringAdd(ScrabbleString add) {
+        return new ScrabbleString(add.getValue() + this.toString());
+    }
 }

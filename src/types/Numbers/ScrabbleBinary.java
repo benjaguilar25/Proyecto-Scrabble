@@ -62,4 +62,9 @@ public class ScrabbleBinary extends AbstractType {
         return bit == '0' ? 0 : 1;
     }
 
+    @Override
+    public ScrabbleString stringAdd(ScrabbleString add) {
+        return new ScrabbleString(add.getValue() + this.toString());
+    }
+
 }

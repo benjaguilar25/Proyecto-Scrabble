@@ -21,8 +21,12 @@ public class ScrabbleString extends AbstractType {
         return s;
     }
 
+    public ScrabbleString add(AbstractType t) {
+        return t.stringAdd(this);
+    }
+
     @Override
     public ScrabbleString stringAdd(ScrabbleString add) {
-        return new ScrabbleString(this.s + add);
+        return new ScrabbleString(add.s + this.s);
     }
 }

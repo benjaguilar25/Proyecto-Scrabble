@@ -27,6 +27,6 @@ public class ScrabbleBool extends AbstractType {
 
     @Override
     public ScrabbleString stringAdd(ScrabbleString add) {
-        return new ScrabbleString(this.toString());
+        return new ScrabbleString(add.getValue() + this.toString());
     }
 }

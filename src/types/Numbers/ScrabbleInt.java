@@ -69,4 +69,9 @@ public class ScrabbleInt extends AbstractType {
     public String toString() {
         return String.valueOf(i);
     }
+
+    @Override
+    public ScrabbleString stringAdd(ScrabbleString add) {
+        return new ScrabbleString(add.getValue() + this.toString());
+    }
 }
