@@ -20,4 +20,9 @@ public class ScrabbleString extends AbstractType {
     public String toString() {
         return s;
     }
+
+    @Override
+    public ScrabbleString stringAdd(ScrabbleString add) {
+        return new ScrabbleString(this.s + add);
+    }
 }

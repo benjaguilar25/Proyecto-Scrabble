@@ -24,4 +24,9 @@ public class ScrabbleBool extends AbstractType {
     public String toString() {
         return String.valueOf(b);
     }
+
+    @Override
+    public ScrabbleString stringAdd(ScrabbleString add) {
+        return new ScrabbleString(this.toString());
+    }
 }
