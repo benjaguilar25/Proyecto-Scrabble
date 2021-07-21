@@ -25,14 +25,12 @@ public class ScrabbleBinary extends AbstractType {
     }
 
     public ScrabbleFloat to_Float() {
-        return new ScrabbleFloat(this.to_Int().to_Float().getValue());
+        return this.to_Int().to_Float();
     }
 
     public ScrabbleBinary to_Binary() {
-
+        return new ScrabbleBinary(b);
     }
-
-
 
     public ScrabbleInt to_Int() {
         return new ScrabbleInt(binToInt(b));

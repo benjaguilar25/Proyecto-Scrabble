@@ -24,7 +24,40 @@ public class ScrabbleInt extends AbstractType {
     }
 
     public ScrabbleBinary to_Binary() {
-        return new ScrabbleBinary();
+        return new ScrabbleBinary(intToBinary(this.i));
+    }
+
+    public String intToBinary(int n) {
+        int abs_n = Math.abs(n);
+        String bin_n = positiveIntToBinary(abs_n);
+
+        if (n < 0) {
+            bin_n = twosComplement(bin_n);
+        }
+
+        return bin_n;
+    }
+
+    public String positiveIntToBinary(int n) {
+        String s = "";
+        while (n > 0) {
+            s = ((n % 2 ) == 0 ? "0":"1") + s;
+            n = n/2;
+        }
+        return "0" + s;
+    }
+
+    public String twosComplement(String s) {
+        String neg_s = "";
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '0') {
+                neg_s += "1";
+            }
+            else {
+                neg_s += "0";
+            }
+        }
+        return neg_s;
     }
 
     @Override
