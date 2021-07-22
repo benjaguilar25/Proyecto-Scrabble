@@ -7,11 +7,11 @@ public interface INumber extends IType {
 
     ScrabbleFloat floatAdd(ScrabbleFloat added);
     ScrabbleFloat floatSubtract(ScrabbleFloat subtracted);
-    ScrabbleFloat floatMultiply(ScrabbleFloat multiplier);
-    ScrabbleFloat floatDivide(ScrabbleFloat divider);
+    ScrabbleFloat floatMultiply(ScrabbleFloat multiplied);
+    ScrabbleFloat floatDivide(ScrabbleFloat divided);
 
     INumber intAdd(ScrabbleInt added);
     INumber intSubtract(ScrabbleInt subtracted);
-    INumber intMultiply(ScrabbleInt multiplier);
-    INumber intDivide(ScrabbleInt divider);
+    INumber intMultiply(ScrabbleInt multiplied);
+    INumber intDivide(ScrabbleInt divided);
 }

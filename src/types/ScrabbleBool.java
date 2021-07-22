@@ -48,13 +48,12 @@ public class ScrabbleBool extends AbstractType implements ILogic {
         return new ScrabbleBool(this.getValue() && b.getValue());
     }
 
-    @Override
     public ILogic andBinary(ScrabbleBinary b) {
         String bin = b.getValue();
         String new_bin = "";
         int l = bin.length();
         for (int i = 0; i < l; i++) {
-            if (bin.charAt(i) == '1' && this.getValue() == true) {
+            if (bin.charAt(i) == '1' && this.getValue()) {
                 new_bin += "1";
             }
             else {
@@ -69,13 +68,12 @@ public class ScrabbleBool extends AbstractType implements ILogic {
         return new ScrabbleBool(this.getValue() || b.getValue());
     }
 
-    @Override
     public ILogic orBinary(ScrabbleBinary b) {
         String bin = b.getValue();
         String new_bin = "";
         int l = bin.length();
         for (int i = 0; i < l; i++) {
-            if (bin.charAt(i) == '0' && this.getValue() == false) {
+            if (bin.charAt(i) == '0' && !this.getValue()) {
                 new_bin += "0";
             }
             else {

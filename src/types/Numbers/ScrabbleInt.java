@@ -74,4 +74,60 @@ public class ScrabbleInt extends AbstractType implements INumber {
     public ScrabbleString stringAdd(ScrabbleString add) {
         return new ScrabbleString(add.getValue() + this.toString());
     }
+
+    public INumber add(INumber added) {
+        return intAdd(this);
+    }
+
+    public INumber subtract(INumber subtracts) {
+        return intSubtract(this);
+    }
+
+    public INumber multiply(INumber multiplier) {
+        return intMultiply(this);
+    }
+
+    public INumber divide(INumber divider) {
+        return intDivide(this);
+    }
+
+    @Override
+    public ScrabbleFloat floatAdd(ScrabbleFloat added) {
+        return new ScrabbleFloat(this.getValue() + added.getValue());
+    }
+
+    @Override
+    public ScrabbleFloat floatSubtract(ScrabbleFloat subtracted) {
+        return new ScrabbleFloat(this.getValue() - subtracted.getValue());
+    }
+
+    @Override
+    public ScrabbleFloat floatMultiply(ScrabbleFloat multiplied) {
+        return new ScrabbleFloat(this.getValue() * multiplied.getValue());
+    }
+
+    @Override
+    public ScrabbleFloat floatDivide(ScrabbleFloat divided) {
+        return new ScrabbleFloat(this.getValue() / divided.getValue());
+    }
+
+    @Override
+    public INumber intAdd(ScrabbleInt added) {
+        return new ScrabbleInt(this.getValue() + added.getValue());
+    }
+
+    @Override
+    public INumber intSubtract(ScrabbleInt subtracted) {
+        return new ScrabbleInt(this.getValue() - subtracted.getValue());
+    }
+
+    @Override
+    public INumber intMultiply(ScrabbleInt multiplied) {
+        return new ScrabbleInt(this.getValue() * multiplied.getValue());
+    }
+
+    @Override
+    public INumber intDivide(ScrabbleInt divided) {
+        return new ScrabbleInt(this.getValue() / divided.getValue());
+    }
 }

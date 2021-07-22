@@ -2,6 +2,7 @@ package types.Numbers;
 
 import operators.ILogic;
 import types.AbstractType;
+import types.IType;
 import types.ScrabbleBool;
 import types.ScrabbleString;
 
@@ -112,5 +113,67 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinary, IL
             }
         }
         return new ScrabbleBinary(new_bin);
+    }
+
+    public IType add()
+
+    @Override
+    public ScrabbleBinary binAdd(ScrabbleBinary added) {
+        return null;
+    }
+
+    @Override
+    public ScrabbleBinary binSubtract(ScrabbleBinary subtracted) {
+        return null;
+    }
+
+    @Override
+    public ScrabbleBinary binMultiply(ScrabbleBinary multiplier) {
+        return null;
+    }
+
+    @Override
+    public ScrabbleBinary binDivide(ScrabbleBinary divider) {
+        return null;
+    }
+
+    @Override
+    public ScrabbleFloat floatAdd(ScrabbleFloat added) {
+        return null;
+    }
+
+    @Override
+    public ScrabbleFloat floatSubtract(ScrabbleFloat subtracted) {
+        return null;
+    }
+
+    @Override
+    public ScrabbleFloat floatMultiply(ScrabbleFloat multiplied) {
+        return null;
+    }
+
+    @Override
+    public ScrabbleFloat floatDivide(ScrabbleFloat divided) {
+        return null;
+    }
+
+    @Override
+    public INumber intAdd(ScrabbleInt added) {
+        return null;
+    }
+
+    @Override
+    public INumber intSubtract(ScrabbleInt subtracted) {
+        return null;
+    }
+
+    @Override
+    public INumber intMultiply(ScrabbleInt multiplied) {
+        return null;
+    }
+
+    @Override
+    public INumber intDivide(ScrabbleInt divided) {
+        return null;
     }
 }
