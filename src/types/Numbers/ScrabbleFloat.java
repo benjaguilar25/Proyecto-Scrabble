@@ -3,7 +3,7 @@ package types.Numbers;
 import types.AbstractType;
 import types.ScrabbleString;
 
-public class ScrabbleFloat extends AbstractType {
+public class ScrabbleFloat extends AbstractType implements INumber {
 
     private double d;
     public ScrabbleFloat(double d) {

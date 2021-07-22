@@ -1,9 +1,11 @@
 package types.Numbers;
 
+import operators.ILogic;
 import types.AbstractType;
+import types.ScrabbleBool;
 import types.ScrabbleString;
 
-public class ScrabbleBinary extends AbstractType {
+public class ScrabbleBinary extends AbstractType implements INumber, IBinary, ILogic {
 
     private String b;
     public ScrabbleBinary(String b) {
@@ -24,14 +26,17 @@ public class ScrabbleBinary extends AbstractType {
         return b;
     }
 
+    @Override
     public ScrabbleFloat to_Float() {
         return this.to_Int().to_Float();
     }
 
+    @Override
     public ScrabbleBinary to_Binary() {
         return new ScrabbleBinary(b);
     }
 
+    @Override
     public ScrabbleInt to_Int() {
         return new ScrabbleInt(binToInt(b));
     }
@@ -67,4 +72,45 @@ public class ScrabbleBinary extends AbstractType {
         return new ScrabbleString(add.getValue() + this.toString());
     }
 
+    @Override
+    public ILogic and(ILogic operand) {
+        return operand.andBinary(this);
+    }
+
+    @Override
+    public ILogic or(ILogic operand) {
+        return operand.orBinary(this);
+    }
+
+    @Override
+    public ILogic andBool(ScrabbleBool b) {
+        String bin = this.getValue();
+        String new_bin = "";
+        int l = bin.length();
+        for (int i = 0; i < l; i++) {
+            if (bin.charAt(i) == '1' && b.getValue() == true) {
+                new_bin += "1";
+            }
+            else {
+                new_bin += "0";
+            }
+        }
+        return new ScrabbleBinary(new_bin);
+    }
+
+    @Override
+    public ILogic orBool(ScrabbleBool b) {
+        String bin = this.getValue();
+        String new_bin = "";
+        int l = bin.length();
+        for (int i = 0; i < l; i++) {
+            if (bin.charAt(i) == '0' && b.getValue() == false) {
+                new_bin += "0";
+            }
+            else {
+                new_bin += "1";
+            }
+        }
+        return new ScrabbleBinary(new_bin);
+    }
 }

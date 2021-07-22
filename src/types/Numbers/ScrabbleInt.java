@@ -1,10 +1,9 @@
 package types.Numbers;
 
 import types.AbstractType;
-import types.ScrabbleBool;
 import types.ScrabbleString;
 
-public class ScrabbleInt extends AbstractType {
+public class ScrabbleInt extends AbstractType implements INumber {
 
     private int i;
     public ScrabbleInt (int i) {
@@ -15,6 +14,7 @@ public class ScrabbleInt extends AbstractType {
         return i;
     }
 
+    @Override
     public ScrabbleFloat to_Float() {
         return new ScrabbleFloat(Double.parseDouble(this.toString()));
     }

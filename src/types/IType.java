@@ -1,6 +1,6 @@
 package types;
 
-public interface Type {
+public interface IType {
     ScrabbleString to_String();
     ScrabbleString stringAdd(ScrabbleString add);
 }
