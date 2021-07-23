@@ -1,6 +1,6 @@
 package types.Numbers;
 
-public interface IBinary {
+public interface IBinOperand {
 
     ScrabbleBinary binAdd(ScrabbleBinary added);
     ScrabbleBinary binSubtract(ScrabbleBinary subtracted);

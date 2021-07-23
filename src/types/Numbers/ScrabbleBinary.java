@@ -2,11 +2,10 @@ package types.Numbers;
 
 import operators.ILogic;
 import types.AbstractType;
-import types.IType;
 import types.ScrabbleBool;
 import types.ScrabbleString;
 
-public class ScrabbleBinary extends AbstractType implements INumber, IBinary, ILogic {
+public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand, ILogic {
 
     private String b;
     public ScrabbleBinary(String b) {
@@ -89,7 +88,7 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinary, IL
         String new_bin = "";
         int l = bin.length();
         for (int i = 0; i < l; i++) {
-            if (bin.charAt(i) == '1' && b.getValue() == true) {
+            if (bin.charAt(i) == '1' && b.getValue()) {
                 new_bin += "1";
             }
             else {
@@ -105,7 +104,7 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinary, IL
         String new_bin = "";
         int l = bin.length();
         for (int i = 0; i < l; i++) {
-            if (bin.charAt(i) == '0' && b.getValue() == false) {
+            if (bin.charAt(i) == '0' && !b.getValue()) {
                 new_bin += "0";
             }
             else {
@@ -115,7 +114,77 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinary, IL
         return new ScrabbleBinary(new_bin);
     }
 
-    public IType add()
+    @Override
+    public ILogic andBinary(ScrabbleBinary b) {
+        String bin1 = b.getValue();
+        String bin2 = this.getValue();
+        String new_bin = "";
+        int l = Math.max(bin1.length(), bin2.length());
+        if (bin1.length() == l) {
+            while (bin2.length() != l) {
+                bin2 = "0" + bin2;
+            }
+        }
+        else {
+            while (bin1.length() != l) {
+                bin1 = "0" + bin1;
+            }
+        }
+
+        for (int i = 0; i < l; i++) {
+            if (bin1.charAt(i) == '1' && bin2.charAt(i) == '1') {
+                new_bin += "1";
+            }
+            else {
+                new_bin += "0";
+            }
+        }
+        return new ScrabbleBinary(new_bin);
+    }
+
+    @Override
+    public ILogic orBinary(ScrabbleBinary b) {
+        String bin1 = b.getValue();
+        String bin2 = this.getValue();
+        String new_bin = "";
+        int l = Math.max(bin1.length(), bin2.length());
+        if (bin1.length() == l) {
+            while (bin2.length() != l) {
+                bin2 = "0" + bin2;
+            }
+        }
+        else {
+            while (bin1.length() != l) {
+                bin1 = "0" + bin1;
+            }
+        }
+
+        for (int i = 0; i < l; i++) {
+            if (bin1.charAt(i) == '0' && bin2.charAt(i) == '0') {
+                new_bin += "0";
+            }
+            else {
+                new_bin += "1";
+            }
+        }
+        return new ScrabbleBinary(new_bin);
+    }
+
+    public IBinOperand add(IBinOperand adds) {
+        return binAdd(this);
+    }
+
+    public IBinOperand subtract(IBinOperand subtracts) {
+        return binSubtract(this);
+    }
+
+    public IBinOperand multiply(IBinOperand multiplier) {
+        return binMultiply(this);
+    }
+
+    public IBinOperand divide(IBinOperand divider) {
+        return binDivide(this);
+    }
 
     @Override
     public ScrabbleBinary binAdd(ScrabbleBinary added) {
@@ -139,41 +208,43 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinary, IL
 
     @Override
     public ScrabbleFloat floatAdd(ScrabbleFloat added) {
-        return null;
+        return new ScrabbleFloat(added.getValue() + this.to_Float().getValue());
     }
 
     @Override
     public ScrabbleFloat floatSubtract(ScrabbleFloat subtracted) {
-        return null;
+        return new ScrabbleFloat(subtracted.getValue() - this.to_Float().getValue());
     }
 
     @Override
     public ScrabbleFloat floatMultiply(ScrabbleFloat multiplied) {
-        return null;
+        return new ScrabbleFloat(multiplied.getValue() * this.to_Float().getValue());
     }
 
     @Override
     public ScrabbleFloat floatDivide(ScrabbleFloat divided) {
-        return null;
+        return new ScrabbleFloat(divided.getValue() / this.to_Float().getValue());
     }
 
     @Override
     public INumber intAdd(ScrabbleInt added) {
-        return null;
+        return new ScrabbleInt(added.getValue() + this.to_Int().getValue());
     }
 
     @Override
     public INumber intSubtract(ScrabbleInt subtracted) {
-        return null;
+        return new ScrabbleInt(subtracted.getValue() - this.to_Int().getValue());
     }
 
     @Override
     public INumber intMultiply(ScrabbleInt multiplied) {
-        return null;
+        return new ScrabbleInt(multiplied.getValue() * this.to_Int().getValue());
     }
 
     @Override
     public INumber intDivide(ScrabbleInt divided) {
-        return null;
+        return new ScrabbleInt(divided.getValue() / this.to_Int().getValue());
     }
+
+
 }

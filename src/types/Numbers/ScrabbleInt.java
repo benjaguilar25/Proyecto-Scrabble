@@ -3,7 +3,7 @@ package types.Numbers;
 import types.AbstractType;
 import types.ScrabbleString;
 
-public class ScrabbleInt extends AbstractType implements INumber {
+public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
 
     private int i;
     public ScrabbleInt (int i) {
@@ -75,7 +75,7 @@ public class ScrabbleInt extends AbstractType implements INumber {
         return new ScrabbleString(add.getValue() + this.toString());
     }
 
-    public INumber add(INumber added) {
+    public INumber add(INumber adds) {
         return intAdd(this);
     }
 
@@ -129,5 +129,25 @@ public class ScrabbleInt extends AbstractType implements INumber {
     @Override
     public INumber intDivide(ScrabbleInt divided) {
         return new ScrabbleInt(this.getValue() / divided.getValue());
+    }
+
+    @Override
+    public ScrabbleBinary binAdd(ScrabbleBinary added) {
+        return null;
+    }
+
+    @Override
+    public ScrabbleBinary binSubtract(ScrabbleBinary subtracted) {
+        return null;
+    }
+
+    @Override
+    public ScrabbleBinary binMultiply(ScrabbleBinary multiplier) {
+        return null;
+    }
+
+    @Override
+    public ScrabbleBinary binDivide(ScrabbleBinary divider) {
+        return null;
     }
 }

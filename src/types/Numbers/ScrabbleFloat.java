@@ -14,6 +14,7 @@ public class ScrabbleFloat extends AbstractType implements INumber {
         return d;
     }
 
+    @Override
     public ScrabbleFloat to_Float() {
         return new ScrabbleFloat(d);
     }
