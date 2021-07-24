@@ -3,7 +3,16 @@ package types.Numbers;
 import types.IType;
 
 public interface INumber extends IType {
+
+    // section - TRANSFORMATIONS
+
     ScrabbleFloat to_Float();
+
+    // section
+
+
+
+    // section - OPERATIONS
 
     ScrabbleFloat floatAdd(ScrabbleFloat added);
     ScrabbleFloat floatSubtract(ScrabbleFloat subtracted);
@@ -14,4 +23,6 @@ public interface INumber extends IType {
     INumber intSubtract(ScrabbleInt subtracted);
     INumber intMultiply(ScrabbleInt multiplied);
     INumber intDivide(ScrabbleInt divided);
+
+    // section
 }

@@ -5,13 +5,32 @@ import types.ScrabbleString;
 
 public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
 
+    // section - INIT
+
     private int i;
     public ScrabbleInt (int i) {
         this.i = i;
     }
 
+    // section
+
+
+
+    // section - GETTER
+
     public int getValue() {
         return i;
+    }
+
+    // section
+
+
+
+    // section - TRANSFORMATIONS
+
+    @Override
+    public ScrabbleString to_String() {
+        return new ScrabbleString(this.toString());
     }
 
     @Override
@@ -26,6 +45,13 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
     public ScrabbleBinary to_Binary() {
         return new ScrabbleBinary(intToBinary(this.getValue()));
     }
+
+    // section
+
+
+
+
+    // section - AUX BINARY TRANSFORMATIONS
 
     public String intToBinary(int n) {
         int abs_n = Math.abs(n);
@@ -72,24 +98,14 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
                 neg_s += "0";
             }
         }
-        ScrabbleBinary neg = new ScrabbleBinary(neg_s);
-        return neg.getValue();
+        return neg_s;
     }
 
-    @Override
-    public ScrabbleString to_String() {
-        return new ScrabbleString(this.toString());
-    }
+    // section
 
-    @Override
-    public String toString() {
-        return String.valueOf(i);
-    }
 
-    @Override
-    public ScrabbleString stringAdd(ScrabbleString add) {
-        return new ScrabbleString(add.getValue() + this.toString());
-    }
+
+    // section - OPERATE
 
     public INumber add(INumber adds) {
         return adds.intAdd(this);
@@ -107,44 +123,55 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
         return divider.intDivide(this);
     }
 
+    // section
+
+
+
+    // section - OPERATIONS DD (DOUBLE DISPATCH)
+
+    @Override
+    public ScrabbleString stringAdd(ScrabbleString added) {
+        return new ScrabbleString(added.getValue() + this.toString());
+    }
+
     @Override
     public ScrabbleFloat floatAdd(ScrabbleFloat added) {
-        return new ScrabbleFloat(this.getValue() + added.getValue());
+        return new ScrabbleFloat( added.getValue() + this.getValue());
     }
 
     @Override
     public ScrabbleFloat floatSubtract(ScrabbleFloat subtracted) {
-        return new ScrabbleFloat(this.getValue() - subtracted.getValue());
+        return new ScrabbleFloat(subtracted.getValue() - this.getValue());
     }
 
     @Override
     public ScrabbleFloat floatMultiply(ScrabbleFloat multiplied) {
-        return new ScrabbleFloat(this.getValue() * multiplied.getValue());
+        return new ScrabbleFloat(multiplied.getValue() * this.getValue());
     }
 
     @Override
     public ScrabbleFloat floatDivide(ScrabbleFloat divided) {
-        return new ScrabbleFloat(this.getValue() / divided.getValue());
+        return new ScrabbleFloat(divided.getValue() / this.getValue() );
     }
 
     @Override
     public INumber intAdd(ScrabbleInt added) {
-        return new ScrabbleInt(this.getValue() + added.getValue());
+        return new ScrabbleInt(added.getValue() + this.getValue());
     }
 
     @Override
     public INumber intSubtract(ScrabbleInt subtracted) {
-        return new ScrabbleInt(this.getValue() - subtracted.getValue());
+        return new ScrabbleInt(subtracted.getValue() - this.getValue());
     }
 
     @Override
     public INumber intMultiply(ScrabbleInt multiplied) {
-        return new ScrabbleInt(this.getValue() * multiplied.getValue());
+        return new ScrabbleInt(multiplied.getValue() * this.getValue());
     }
 
     @Override
     public INumber intDivide(ScrabbleInt divided) {
-        return new ScrabbleInt(this.getValue() / divided.getValue());
+        return new ScrabbleInt(divided.getValue() / this.getValue());
     }
 
     @Override
@@ -174,6 +201,19 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
         ScrabbleInt sDivide_int = new ScrabbleInt(divide);
         return sDivide_int.to_Binary();
     }
+
+    // section
+
+
+
+    // section - TOSTR DD
+
+    @Override
+    public String toString() {
+        return String.valueOf(i);
+    }
+
+    // section
 }
 
 

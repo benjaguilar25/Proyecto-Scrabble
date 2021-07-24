@@ -5,19 +5,28 @@ import types.ScrabbleString;
 
 public class ScrabbleFloat extends AbstractType implements INumber {
 
+    // section - INIT
+
     private double d;
     public ScrabbleFloat(double d) {
         this.d = d;
     }
 
+    // section
+
+
+
+    // section - GETTERS
+
     public double getValue() {
         return d;
     }
 
-    @Override
-    public ScrabbleFloat to_Float() {
-        return new ScrabbleFloat(d);
-    }
+    // section
+
+
+
+    // section - TRANSFORMATIONS
 
     @Override
     public ScrabbleString to_String() {
@@ -25,14 +34,15 @@ public class ScrabbleFloat extends AbstractType implements INumber {
     }
 
     @Override
-    public String toString() {
-        return String.valueOf(d);
+    public ScrabbleFloat to_Float() {
+        return new ScrabbleFloat(d);
     }
 
-    @Override
-    public ScrabbleString stringAdd(ScrabbleString add) {
-        return new ScrabbleString(add.getValue() + this.toString());
-    }
+    // section
+
+
+
+    // section OPERATE
 
     public ScrabbleFloat add(INumber adds) {
         return adds.floatAdd(this);
@@ -50,43 +60,68 @@ public class ScrabbleFloat extends AbstractType implements INumber {
         return divider.floatDivide(this);
     }
 
+    // section
+
+
+
+    // section - OPERATIONS DD (DOUBLE DISPATCH)
+
+    @Override
+    public ScrabbleString stringAdd(ScrabbleString add) {
+        return new ScrabbleString(add.getValue() + this.toString());
+    }
+
+
     @Override
     public ScrabbleFloat floatAdd(ScrabbleFloat added) {
-        return new ScrabbleFloat(this.getValue() + added.getValue());
+        return new ScrabbleFloat(added.getValue() + this.getValue());
     }
 
     @Override
     public ScrabbleFloat floatSubtract(ScrabbleFloat subtracted) {
-        return new ScrabbleFloat(this.getValue() - subtracted.getValue());
+        return new ScrabbleFloat(subtracted.getValue() - this.getValue());
     }
 
     @Override
     public ScrabbleFloat floatMultiply(ScrabbleFloat multiplied) {
-        return new ScrabbleFloat(this.getValue() * multiplied.getValue());
+        return new ScrabbleFloat(multiplied.getValue() * this.getValue());
     }
 
     @Override
     public ScrabbleFloat floatDivide(ScrabbleFloat divided) {
-        return new ScrabbleFloat(this.getValue() / divided.getValue());
+        return new ScrabbleFloat(divided.getValue() / this.getValue());
     }
 
     @Override
     public INumber intAdd(ScrabbleInt added) {
-        return new ScrabbleFloat(this.getValue() + added.to_Float().getValue());
+        return new ScrabbleFloat(added.to_Float().getValue() + this.getValue());
     }
 
     @Override
     public INumber intSubtract(ScrabbleInt subtracted) {
-        return new ScrabbleFloat(this.getValue() - subtracted.to_Float().getValue());
+        return new ScrabbleFloat(subtracted.to_Float().getValue() - this.getValue());
     }
 
     @Override
     public INumber intMultiply(ScrabbleInt multiplied) {
-        return new ScrabbleFloat(this.getValue() * multiplied.to_Float().getValue());
+        return new ScrabbleFloat(multiplied.to_Float().getValue() * this.getValue());
     }
 
     @Override
     public INumber intDivide(ScrabbleInt divided) {
-        return new ScrabbleFloat(this.getValue() / divided.to_Float().getValue());
+        return new ScrabbleFloat(divided.to_Float().getValue() / this.getValue());
     }
+
+    // section
+
+
+
+    // section - TOSTR DD
+
+    @Override
+    public String toString() {
+        return String.valueOf(d);
+    }
+
+    // section
 }

@@ -5,33 +5,43 @@ import types.Numbers.ScrabbleBinary;
 
 public class ScrabbleBool extends AbstractType implements ILogic {
 
+    // section - INIT
+
     private boolean b;
     public ScrabbleBool(boolean b) {
         this.b = b;
     }
 
+    // section
+
+
+
+    // section - GETTERS
+
     public boolean getValue() {
         return b;
     }
 
-    public ScrabbleBool to_Bool() {
-        return new ScrabbleBool(b);
-    }
+    // section
+
+
+
+    // section - TRANSFORMATIONS
 
     @Override
     public ScrabbleString to_String() {
         return new ScrabbleString(this.toString());
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(b);
+    public ScrabbleBool to_Bool() {
+        return new ScrabbleBool(b);
     }
 
-    @Override
-    public ScrabbleString stringAdd(ScrabbleString add) {
-        return new ScrabbleString(add.getValue() + this.toString());
-    }
+    // section
+
+
+
+    // section - OPERATE
 
     @Override
     public ILogic and(ILogic operand) {
@@ -50,6 +60,17 @@ public class ScrabbleBool extends AbstractType implements ILogic {
         else {
             return new ScrabbleBool(true);
         }
+    }
+
+    // section
+
+
+
+    // section - OPERATIONS DD (DOUBLE DISPATCH)
+
+    @Override
+    public ScrabbleString stringAdd(ScrabbleString add) {
+        return new ScrabbleString(add.getValue() + this.toString());
     }
 
     @Override
@@ -93,4 +114,17 @@ public class ScrabbleBool extends AbstractType implements ILogic {
         }
         return new ScrabbleBinary(new_bin);
     }
+
+    // section
+
+
+
+    // section - TOSTR DD
+
+    @Override
+    public String toString() {
+        return String.valueOf(b);
+    }
+
+    // section
 }
