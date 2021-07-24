@@ -3,10 +3,16 @@ package types;
 import operators.ILogic;
 import types.Numbers.ScrabbleBinary;
 
+// CLASS
+// ScrabbleBool type extends the AbstractType abstract class, which means
+// this type can be transformed and added the same way as any IType
+// Implements ILogic interface, which means this type operates
+// logically with other ILogic types (ScrabbleBool, ScrabbleBinary)
 public class ScrabbleBool extends AbstractType implements ILogic {
 
     // section - INIT
 
+    // ScrabbleBool type stores boolean java primitive
     private boolean b;
     public ScrabbleBool(boolean b) {
         this.b = b;
@@ -18,6 +24,8 @@ public class ScrabbleBool extends AbstractType implements ILogic {
 
     // section - GETTERS
 
+    // In order to use the Type stored value, a getter will be created
+    // returns stored value => boolean b
     public boolean getValue() {
         return b;
     }
@@ -29,10 +37,14 @@ public class ScrabbleBool extends AbstractType implements ILogic {
     // section - TRANSFORMATIONS
 
     @Override
+    // ScrabbleBool type can be transformed into a ScrabbleString type
+    // returns a new ScrabbleString => ScrabbleString(toStr b)
     public ScrabbleString to_String() {
         return new ScrabbleString(this.toString());
     }
 
+    // ScrabbleBool type can be transformed into itself, if you want of course
+    // returns a new ScrabbleBool => ScrabbleBool(boolean b)
     public ScrabbleBool to_Bool() {
         return new ScrabbleBool(b);
     }
@@ -44,6 +56,8 @@ public class ScrabbleBool extends AbstractType implements ILogic {
     // section - OPERATE
 
     @Override
+    // ScrabbleString type can add to itself any other type
+    // returns and calls another method stringAdd implying a Type is being added to this ScrabbleString
     public ILogic and(ILogic operand) {
         return andBool(this);
     }

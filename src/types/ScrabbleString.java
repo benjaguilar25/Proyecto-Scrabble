@@ -1,10 +1,13 @@
 package types;
 
-//
+// CLASS
+// ScrabbleString type extends the AbstractType abstract class which means
+// this type can be transformed and added the same way as any IType
 public class ScrabbleString extends AbstractType {
 
     // section - INIT
 
+    // ScrabbleString type stores String java primitive
     private String s;
     public ScrabbleString(String s) {
         this.s = s;
@@ -16,6 +19,8 @@ public class ScrabbleString extends AbstractType {
 
     // section - GETTERS
 
+    // In order to use the Type stored value, a getter will be created
+    // returns stored value => String s
     public String getValue() {
         return s;
     }
@@ -27,6 +32,8 @@ public class ScrabbleString extends AbstractType {
     // section - TRANSFORMATIONS
 
     @Override
+    // ScrabbleString type can be transformed into itself, if you want of course
+    // returns a new ScrabbleString => ScrabbleString(String s)
     public ScrabbleString to_String() {
         return new ScrabbleString(s);
     }
@@ -37,6 +44,8 @@ public class ScrabbleString extends AbstractType {
 
     // section - OPERATE
 
+    // ScrabbleString type can add to itself any other type
+    // returns and calls another method stringAdd implying a Type is being added to this ScrabbleString
     public ScrabbleString add(IType added) {
         return added.stringAdd(this);
     }
@@ -48,6 +57,8 @@ public class ScrabbleString extends AbstractType {
     // section - OPERATIONS DD (DOUBLE DISPATCH)
 
     @Override
+    // ScrabbleString type can be added to another ScrabbleString too
+    // returns the same type => ScrabbleString(String concatenatedStrings)
     public ScrabbleString stringAdd(ScrabbleString add) {
         return new ScrabbleString(add.getValue() + this.getValue());
     }
@@ -59,6 +70,8 @@ public class ScrabbleString extends AbstractType {
     // section - TOSTR DD
 
     @Override
+    // ToString method is overridden by one that returns a String value of the type
+    // returns the stored value => String s
     public String toString() {
         return s;
     }
