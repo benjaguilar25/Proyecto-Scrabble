@@ -151,4 +151,24 @@ public class ScrabbleFloat extends AbstractType implements INumber {
     }
 
     // section
+
+
+
+    // section - TESTING
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AbstractType) {
+            var o = (ScrabbleFloat) obj;
+            return o.d == this.d;
+        }
+        return obj instanceof AbstractType;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    // section
 }

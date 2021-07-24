@@ -80,4 +80,24 @@ public class ScrabbleString extends AbstractType {
     }
 
     // section
+
+
+
+    // section - TESTING
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AbstractType) {
+            var o = (ScrabbleString) obj;
+            return o.s.equals(this.s);
+        }
+        return obj instanceof AbstractType;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    // section
 }

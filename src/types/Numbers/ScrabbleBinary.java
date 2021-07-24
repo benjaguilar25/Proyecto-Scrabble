@@ -368,6 +368,26 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
         return b;
     }
 
-    //
+    // section
+
+
+
+    // section - TESTING
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AbstractType) {
+            var o = (ScrabbleBinary) obj;
+            return o.b.equals(this.b);
+        }
+        return obj instanceof AbstractType;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    // section
 
 }

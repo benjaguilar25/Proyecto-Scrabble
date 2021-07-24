@@ -148,4 +148,24 @@ public class ScrabbleBool extends AbstractType implements ILogic {
     }
 
     // section
+
+
+
+    // section - TESTING
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AbstractType) {
+            var o = (ScrabbleBool) obj;
+            return o.b == this.b;
+        }
+        return obj instanceof AbstractType;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    // section
 }

@@ -20,4 +20,6 @@ public abstract class AbstractType implements IType {
     }
 
     // section
+
+
 }

@@ -250,6 +250,26 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
     }
 
     // section
+
+
+
+    // section - TESTING
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AbstractType) {
+            var o = (ScrabbleInt) obj;
+            return o.i == this.i;
+        }
+        return obj instanceof AbstractType;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    // section
 }
 
 
