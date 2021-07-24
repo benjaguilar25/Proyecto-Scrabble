@@ -3,10 +3,20 @@ package types.Numbers;
 import types.AbstractType;
 import types.ScrabbleString;
 
+// CLASS
+// ScrabbleInt type extends the AbstractType abstract class, which means
+// this type can be transformed and added the same way as any IType (every type)
+// Implements INumber interface, which means this type transform, operates, and
+// can be operated as other INumber types (ScrabbleFloat, ScrabbleInt, ScrabbleBinary)
+// Implements IBinOperand interface, which means ScrabbleBinary type transform and operates
+// with ScrabbleBinary types and this one exclusively (ScrabbleBinary, ScrabbleInt)
+
+// stores : int i
 public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
 
     // section - INIT
 
+    // ScrabbleInt type stores int java primitive
     private int i;
     public ScrabbleInt (int i) {
         this.i = i;
@@ -18,6 +28,8 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
 
     // section - GETTER
 
+    // In order to use the Type stored value, a getter will be created
+    // returns stored value => int i
     public int getValue() {
         return i;
     }
@@ -29,19 +41,27 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
     // section - TRANSFORMATIONS
 
     @Override
+    // ScrabbleInt type can be transformed into a ScrabbleString type
+    // returns a new ScrabbleString => ScrabbleString(toStr i)
     public ScrabbleString to_String() {
         return new ScrabbleString(this.toString());
     }
 
     @Override
+    // ScrabbleInt type can be transformed into a ScrabbleFloat type
+    // returns a new ScrabbleFloat => ScrabbleFloat(toDouble i)
     public ScrabbleFloat to_Float() {
         return new ScrabbleFloat(Double.parseDouble(this.toString()));
     }
 
+    // ScrabbleInt type can be transformed into itself, if you want of course
+    // returns a new ScrabbleInt => ScrabbleInt(int i)
     public ScrabbleInt to_Int() {
         return new ScrabbleInt(i);
     }
 
+    // ScrabbleInt type can be transformed into a ScrabbleBinary type
+    // returns a new ScrabbleBinary => ScrabbleBinary(toBinStr i)
     public ScrabbleBinary to_Binary() {
         return new ScrabbleBinary(intToBinary(this.getValue()));
     }
@@ -107,6 +127,12 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
 
     // section - OPERATE
 
+    // ScrabbleInt type can add/subtract/multiply/divide with any other INumber inherit type
+    // returns and calls another method floatAdd implying a Type is being added to this ScrabbleFloat
+
+    // Operating with ScrabbleInt types leads to different types since int
+    // primitive is malleable to other INumber primitives results
+    // intOp methods are called returning a new ScrabbleInt
     public INumber add(INumber adds) {
         return adds.intAdd(this);
     }
@@ -129,11 +155,15 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
 
     // section - OPERATIONS DD (DOUBLE DISPATCH)
 
+    // ScrabbleInt type can be added with a ScrabbleString type
+    // this will lead to a new ScrabbleString type with both values concatenated as a String primitive
     @Override
     public ScrabbleString stringAdd(ScrabbleString added) {
         return new ScrabbleString(added.getValue() + this.toString());
     }
 
+    // ScrabbleInt type can be added/subtracted/multiplied/divided with a ScrabbleFloat type
+    // this will lead to a new ScrabbleFloat type with the operation interpreted as a double value
     @Override
     public ScrabbleFloat floatAdd(ScrabbleFloat added) {
         return new ScrabbleFloat( added.getValue() + this.getValue());
@@ -154,6 +184,8 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
         return new ScrabbleFloat(divided.getValue() / this.getValue() );
     }
 
+    // ScrabbleInt type can be added/subtracted/multiplied/divided with a ScrabbleInt type
+    // this will lead to a new ScrabbleInt type with the operation interpreted as an int value
     @Override
     public INumber intAdd(ScrabbleInt added) {
         return new ScrabbleInt(added.getValue() + this.getValue());
@@ -174,6 +206,8 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
         return new ScrabbleInt(divided.getValue() / this.getValue());
     }
 
+    // ScrabbleInt type can be added/subtracted/multiplied/divided with a ScrabbleBinary type
+    // this will lead to a new ScrabbleBinary type with the operation interpreted as a String value
     @Override
     public ScrabbleBinary binAdd(ScrabbleBinary added) {
         int add = added.to_Int().getValue() + this.getValue();
@@ -208,6 +242,8 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
 
     // section - TOSTR DD
 
+    // ToString method is overridden by one that returns a String value of the type
+    // returns the stored value as a String => toStr i
     @Override
     public String toString() {
         return String.valueOf(i);

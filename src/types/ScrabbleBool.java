@@ -5,21 +5,23 @@ import types.Numbers.ScrabbleBinary;
 
 // CLASS
 // ScrabbleBool type extends the AbstractType abstract class, which means
-// this type can be transformed and added the same way as any IType
+// this type can be transformed and added the same way as any IType (every type)
 // Implements ILogic interface, which means this type operates
 // logically with other ILogic types (ScrabbleBool, ScrabbleBinary)
+
+// stores : boolean b
 public class ScrabbleBool extends AbstractType implements ILogic {
 
     // section - INIT
 
     // ScrabbleBool type stores boolean java primitive
     private boolean b;
+
     public ScrabbleBool(boolean b) {
         this.b = b;
     }
 
     // section
-
 
 
     // section - GETTERS
@@ -31,7 +33,6 @@ public class ScrabbleBool extends AbstractType implements ILogic {
     }
 
     // section
-
 
 
     // section - TRANSFORMATIONS
@@ -52,12 +53,12 @@ public class ScrabbleBool extends AbstractType implements ILogic {
     // section
 
 
-
     // section - OPERATE
 
+    // ScrabbleBool type can operate with every ILogic inherit type
+    // this operations specifically are Logic ones
+    // including and, or & neg
     @Override
-    // ScrabbleString type can add to itself any other type
-    // returns and calls another method stringAdd implying a Type is being added to this ScrabbleString
     public ILogic and(ILogic operand) {
         return andBool(this);
     }
@@ -70,8 +71,7 @@ public class ScrabbleBool extends AbstractType implements ILogic {
     public ScrabbleBool neg() {
         if (this.getValue()) {
             return new ScrabbleBool(false);
-        }
-        else {
+        } else {
             return new ScrabbleBool(true);
         }
     }
@@ -79,14 +79,19 @@ public class ScrabbleBool extends AbstractType implements ILogic {
     // section
 
 
-
     // section - OPERATIONS DD (DOUBLE DISPATCH)
 
+
+    // ScrabbleBool type can be operated with a ScrabbleString type
+    // this will lead to a new ScrabbleString type with both values concatenated as a String primitive
     @Override
     public ScrabbleString stringAdd(ScrabbleString add) {
         return new ScrabbleString(add.getValue() + this.toString());
     }
 
+    // ScrabbleBool type can be operated with every ILogic inherit type
+    // this operations specifically are Logic ones
+    // including and, or & neg
     @Override
     public ILogic andBool(ScrabbleBool b) {
         return new ScrabbleBool(this.getValue() && b.getValue());
@@ -135,6 +140,8 @@ public class ScrabbleBool extends AbstractType implements ILogic {
 
     // section - TOSTR DD
 
+    // ToString method is overridden by one that returns a String value of the type
+    // returns the stored value as a String => toStr b
     @Override
     public String toString() {
         return String.valueOf(b);

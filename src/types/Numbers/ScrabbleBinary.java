@@ -5,10 +5,22 @@ import types.AbstractType;
 import types.ScrabbleBool;
 import types.ScrabbleString;
 
+// CLASS
+// ScrabbleBinary type extends the AbstractType abstract class, which means
+// this type can be transformed and added the same way any IType does (every type)
+// Implements INumber interface, which means this type transform, operates, and
+// can be operated as any other INumber types (ScrabbleFloat, ScrabbleInt, ScrabbleBinary)
+// Implements IBinOperand interface, which means ScrabbleBinary type transform and operates
+// with ScrabbleInt types and self one exclusively (ScrabbleInt, ScrabbleBinary)
+// Implements ILogic interface, which means this type operates
+// logically with any other ILogic types (ScrabbleBool, ScrabbleBinary)
+
+// stores : String b
 public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand, ILogic {
 
     // section - INIT
 
+    // ScrabbleBinary type stores String java primitive
     private String b;
     public ScrabbleBinary(String b) {
         this.b = b;
@@ -20,6 +32,8 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
 
     // section - GETTERS
 
+    // In order to use the Type stored value, a getter will be created
+    // returns stored value => String b
     public String getValue() {
         return b;
     }
@@ -31,21 +45,29 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
     // section - TRANSFORMATIONS
 
     @Override
+    // ScrabbleBinary type can be transformed into a ScrabbleString type
+    // returns a new ScrabbleString => ScrabbleString(toStr b)
     public ScrabbleString to_String() {
         return new ScrabbleString(this.toString());
     }
 
     @Override
+    // ScrabbleBinary type can be transformed into a ScrabbleFloat type
+    // returns a new ScrabbleFloat => ScrabbleString(toDouble b)
     public ScrabbleFloat to_Float() {
         return this.to_Int().to_Float();
     }
 
     @Override
+    // ScrabbleBinary type can be transformed into a ScrabbleInt type
+    // returns a new ScrabbleInt => ScrabbleInt(toInt b)
     public ScrabbleInt to_Int() {
         return new ScrabbleInt(binToInt(b));
     }
 
     @Override
+    // ScrabbleBinary type can be transformed into itself, if you want of course
+    // returns a new ScrabbleBinary => ScrabbleBinary(String b)
     public ScrabbleBinary to_Binary() {
         return new ScrabbleBinary(b);
     }
@@ -55,6 +77,9 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
 
 
     // section - AUX INT TRANSFORMATIONS
+
+    // This methods were delivered by the assignment's PDF
+    // returns any String bin to int
 
     public int binToInt(String binary) {
         if (bitToInt(binary.charAt(0)) == 0) {
@@ -91,6 +116,12 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
 
     // section - OPERATE
 
+    // ScrabbleBinary type can add/subtract/multiply/divide with any other IBinOperand inherit type
+    // returns and calls another method binAdd implying a Type is being added to this ScrabbleBinary
+
+    // Operating with ScrabbleBinary types leads to different types since int
+    // primitive is malleable to other INumber primitives results
+    // binOp methods are called returning a new ScrabbleBinary
     public IBinOperand add(IBinOperand adds) {
         return adds.binAdd(this);
     }
@@ -107,6 +138,9 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
         return divider.binDivide(this);
     }
 
+    // ScrabbleBinary type can operate with every ILogic inherit type
+    // this operations specifically are Logic ones
+    // including and, or & neg
     @Override
     public ILogic and(ILogic operand) {
         return operand.andBinary(this);
@@ -118,8 +152,7 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
     }
 
     public ScrabbleBinary neg() {
-        String neg_value = neg_string(this.getValue());
-        return new ScrabbleBinary(neg_value);
+        return new ScrabbleBinary(this.neg_binary());
     }
 
     // section
@@ -128,7 +161,7 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
 
     // section - AUX NEG OPERATION
 
-    public String neg_string(String s) {
+    public String neg_binary() {
         String neg_value = "";
         for (int i = 0; i < this.getValue().length(); i++) {
             if (this.getValue().charAt(i) == '0') {
@@ -147,11 +180,15 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
 
     // section - OPERATIONS DD (DOUBLE DISPATCH)
 
+    // ScrabbleBinary type can be operated with a ScrabbleString type
+    // this will lead to a new ScrabbleString type with both values concatenated as a String primitive
     @Override
     public ScrabbleString stringAdd(ScrabbleString add) {
         return new ScrabbleString(add.getValue() + this.toString());
     }
 
+    // ScrabbleBinary type can be added/subtracted/multiplied/divided with a ScrabbleFloat type
+    // this will lead to a new ScrabbleFloat type with the operation made as a double value
     @Override
     public ScrabbleFloat floatAdd(ScrabbleFloat added) {
         return new ScrabbleFloat(added.getValue() + this.to_Float().getValue());
@@ -172,6 +209,8 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
         return new ScrabbleFloat(divided.getValue() / this.to_Float().getValue());
     }
 
+    // ScrabbleBinary type can be added/subtracted/multiplied/divided with a ScrabbleInt type
+    // this will lead to a new ScrabbleInt type with the operation interpreted as an int value
     @Override
     public INumber intAdd(ScrabbleInt added) {
         return new ScrabbleInt(added.getValue() + this.to_Int().getValue());
@@ -192,6 +231,8 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
         return new ScrabbleInt(divided.getValue() / this.to_Int().getValue());
     }
 
+    // ScrabbleBinary type can be added/subtracted/multiplied/divided with a ScrabbleBinary type
+    // this will lead to a new ScrabbleBinary type with the operation interpreted as a String value
     @Override
     public ScrabbleBinary binAdd(ScrabbleBinary added) {
         int add = added.to_Int().getValue() + this.to_Int().getValue();
@@ -220,6 +261,9 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
         return sDivide_int.to_Binary();
     }
 
+    // ScrabbleBinary type can be operated with every ILogic inherit type
+    // this operations specifically are Logic ones
+    // including and, or & neg
     @Override
     public ILogic andBool(ScrabbleBool b) {
         String bin = this.getValue();
@@ -294,6 +338,7 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
 
     // section - AUX BINARY OPERATION
 
+    // Method created to simplify and avoid mistakes when operating String binaries
     public String normalizeBin(String bin1, String bin2) {
         String new_bin = "";
         int l = Math.max(bin1.length(), bin2.length());
@@ -316,6 +361,8 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
 
     // section - TOSTR DD
 
+    // ToString method is overridden by one that returns a String value of the type
+    // returns the stored value as a String => String b
     @Override
     public String toString() {
         return b;

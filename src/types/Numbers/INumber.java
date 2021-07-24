@@ -27,8 +27,8 @@ public interface INumber extends IType {
     ScrabbleFloat floatMultiply(ScrabbleFloat multiplied);
     ScrabbleFloat floatDivide(ScrabbleFloat divided);
 
-    // Operating with ScrabbleInt types leads to any INumber as double java
-    // primitive operated with other numbers can't be expressed as another primitive
+    // Operating with ScrabbleInt types leads to any INumber as int java
+    // primitive is pretty malleable to acquire types as Float or Binary
     INumber intAdd(ScrabbleInt added);
     INumber intSubtract(ScrabbleInt subtracted);
     INumber intMultiply(ScrabbleInt multiplied);

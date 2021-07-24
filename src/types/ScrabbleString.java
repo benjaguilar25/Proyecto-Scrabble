@@ -2,7 +2,9 @@ package types;
 
 // CLASS
 // ScrabbleString type extends the AbstractType abstract class which means
-// this type can be transformed and added the same way as any IType
+// this type can be transformed and added the same way as any IType (every type)
+
+// stores : String s
 public class ScrabbleString extends AbstractType {
 
     // section - INIT
@@ -46,6 +48,7 @@ public class ScrabbleString extends AbstractType {
 
     // ScrabbleString type can add to itself any other type
     // returns and calls another method stringAdd implying a Type is being added to this ScrabbleString
+    // stringAdd method is called returning a new ScrabbleString
     public ScrabbleString add(IType added) {
         return added.stringAdd(this);
     }

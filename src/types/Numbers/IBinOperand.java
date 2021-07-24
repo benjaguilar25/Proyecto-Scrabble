@@ -10,7 +10,7 @@ public interface IBinOperand {
 
     // Any IBinOperand can be operated with ScrabbleBinary types
     // this leads to ScrabbleBinary types only, since Int and Binary operations
-    // needs to be expressed as such (ScrabbleBinary)
+    // can be expressed as such when called to add by (ScrabbleBinary)
     ScrabbleBinary binAdd(ScrabbleBinary added);
     ScrabbleBinary binSubtract(ScrabbleBinary subtracted);
     ScrabbleBinary binMultiply(ScrabbleBinary multiplier);
@@ -22,7 +22,7 @@ public interface IBinOperand {
 
     // section - TRANSFORMATIONS
 
-    // Any IBinOperand can be transformed into ScrabbleBinary and ScrabbleInt types
+    // Any IBinOperand can transform into ScrabbleBinary and ScrabbleInt types
     ScrabbleBinary to_Binary();
     ScrabbleInt to_Int();
 
