@@ -35,19 +35,19 @@ public class ScrabbleFloat extends AbstractType implements INumber {
     }
 
     public ScrabbleFloat add(INumber adds) {
-        return floatAdd(this);
+        return adds.floatAdd(this);
     }
 
     public ScrabbleFloat subtract(INumber subtracts) {
-        return floatSubtract(this);
+        return subtracts.floatSubtract(this);
     }
 
     public ScrabbleFloat multiply(INumber multiplier) {
-        return floatMultiply(this);
+        return multiplier.floatMultiply(this);
     }
 
     public ScrabbleFloat divide(INumber divider) {
-        return floatDivide(this);
+        return divider.floatDivide(this);
     }
 
     @Override

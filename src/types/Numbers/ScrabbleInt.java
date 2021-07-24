@@ -24,18 +24,33 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
     }
 
     public ScrabbleBinary to_Binary() {
-        return new ScrabbleBinary(intToBinary(this.i));
+        return new ScrabbleBinary(intToBinary(this.getValue()));
     }
 
     public String intToBinary(int n) {
         int abs_n = Math.abs(n);
-        String bin_n = positiveIntToBinary(abs_n);
-
         if (n < 0) {
+            String bin_nFake = positiveIntToBinary(abs_n);
+            String bin_n = positiveIntToBinary(abs_n - 1);
+            String new_bin = "";
+            int l = Math.max(bin_nFake.length(), bin_n.length());
+            if (bin_nFake.length() == l) {
+                while (bin_n.length() != l) {
+                    bin_n = "0" + bin_n;
+                }
+            }
+            else {
+                while (bin_nFake.length() != l) {
+                    bin_nFake = "0" + bin_nFake;
+                }
+            }
             bin_n = twosComplement(bin_n);
+            return bin_n;
         }
-
-        return bin_n;
+        else {
+            String bin_n = positiveIntToBinary(abs_n);
+            return bin_n;
+        }
     }
 
     public String positiveIntToBinary(int n) {
@@ -57,7 +72,8 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
                 neg_s += "0";
             }
         }
-        return neg_s;
+        ScrabbleBinary neg = new ScrabbleBinary(neg_s);
+        return neg.getValue();
     }
 
     @Override
@@ -76,19 +92,19 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
     }
 
     public INumber add(INumber adds) {
-        return intAdd(this);
+        return adds.intAdd(this);
     }
 
     public INumber subtract(INumber subtracts) {
-        return intSubtract(this);
+        return subtracts.intSubtract(this);
     }
 
     public INumber multiply(INumber multiplier) {
-        return intMultiply(this);
+        return multiplier.intMultiply(this);
     }
 
     public INumber divide(INumber divider) {
-        return intDivide(this);
+        return divider.intDivide(this);
     }
 
     @Override
@@ -133,21 +149,31 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
 
     @Override
     public ScrabbleBinary binAdd(ScrabbleBinary added) {
-        return null;
+        int add = added.to_Int().getValue() + this.getValue();
+        ScrabbleInt sAdd_int = new ScrabbleInt(add);
+        return sAdd_int.to_Binary();
     }
 
     @Override
     public ScrabbleBinary binSubtract(ScrabbleBinary subtracted) {
-        return null;
+        int subtract = subtracted.to_Int().getValue() - this.getValue();
+        ScrabbleInt sSubtract_int = new ScrabbleInt(subtract);
+        return sSubtract_int.to_Binary();
     }
 
     @Override
     public ScrabbleBinary binMultiply(ScrabbleBinary multiplier) {
-        return null;
+        int multiply = multiplier.to_Int().getValue() * this.getValue();
+        ScrabbleInt sMultiply_int = new ScrabbleInt(multiply);
+        return sMultiply_int.to_Binary();
     }
 
     @Override
     public ScrabbleBinary binDivide(ScrabbleBinary divider) {
-        return null;
+        int divide = divider.to_Int().getValue() / this.getValue();
+        ScrabbleInt sDivide_int = new ScrabbleInt(divide);
+        return sDivide_int.to_Binary();
     }
 }
+
+
