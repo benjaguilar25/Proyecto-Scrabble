@@ -5,6 +5,8 @@ import types.AbstractType;
 import types.ScrabbleBool;
 import types.ScrabbleString;
 
+import java.util.Objects;
+
 // CLASS
 // ScrabbleBinary type extends the AbstractType abstract class, which means
 // this type can be transformed and added the same way any IType does (every type)
@@ -385,7 +387,7 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(ScrabbleBinary.class);
     }
 
     // section

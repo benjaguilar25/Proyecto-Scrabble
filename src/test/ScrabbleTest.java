@@ -51,5 +51,38 @@ public class ScrabbleTest {
         assertEquals(expectedSFloat, sFloat);
         assertEquals(expectedSInt, sInt);
         assertEquals(expectedSBin, sBin);
+
+        assertEquals(expectedSString.hashCode(), sString.hashCode());
+        assertEquals(expectedSBool.hashCode(), sBool.hashCode());
+        assertEquals(expectedSFloat.hashCode(), sFloat.hashCode());
+        assertEquals(expectedSInt.hashCode(), sInt.hashCode());
+        assertEquals(expectedSBin.hashCode(), sBin.hashCode());
+    }
+
+
+
+    @Test
+    void stringTrans() {
+
+    }
+
+    @Test
+    void boolTrans() {
+
+    }
+
+    @Test
+    void floatTrans() {
+
+    }
+
+    @Test
+    void intTrans() {
+
+    }
+
+    @Test
+    void binTrans() {
+
     }
 }

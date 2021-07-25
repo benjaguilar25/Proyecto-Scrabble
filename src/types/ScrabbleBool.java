@@ -2,6 +2,9 @@ package types;
 
 import operators.ILogic;
 import types.Numbers.ScrabbleBinary;
+import types.Numbers.ScrabbleFloat;
+
+import java.util.Objects;
 
 // CLASS
 // ScrabbleBool type extends the AbstractType abstract class, which means
@@ -164,7 +167,7 @@ public class ScrabbleBool extends AbstractType implements ILogic {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(ScrabbleBool.class);
     }
 
     // section

@@ -3,6 +3,8 @@ package types.Numbers;
 import types.AbstractType;
 import types.ScrabbleString;
 
+import java.util.Objects;
+
 // CLASS
 // ScrabbleFloat type extends the AbstractType abstract class, which means
 // this type can be transformed and added the same way as any IType (every type)
@@ -167,7 +169,7 @@ public class ScrabbleFloat extends AbstractType implements INumber {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(ScrabbleFloat.class);
     }
 
     // section
