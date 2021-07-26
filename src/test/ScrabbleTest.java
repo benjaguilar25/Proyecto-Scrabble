@@ -63,7 +63,7 @@ public class ScrabbleTest {
 
     @Test
     void stringTrans() {
-
+        System.out.println("Hola amigos");
     }
 
     @Test
