@@ -63,7 +63,9 @@ public class ScrabbleTest {
 
     @Test
     void stringTrans() {
-        System.out.println("Hola amigos");
+        var expectedSString = new ScrabbleString(strVal);
+
+        assertEquals(sString.to_String(), expectedSString);
     }
 
     @Test
