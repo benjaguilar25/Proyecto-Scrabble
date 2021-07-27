@@ -63,12 +63,12 @@ public class ScrabbleBool extends AbstractType implements ILogic {
     // including and, or & neg
     @Override
     public ILogic and(ILogic operand) {
-        return andBool(this);
+        return operand.andBool(this);
     }
 
     @Override
     public ILogic or(ILogic operand) {
-        return orBool(this);
+        return operand.orBool(this);
     }
 
     public ScrabbleBool neg() {
@@ -160,7 +160,7 @@ public class ScrabbleBool extends AbstractType implements ILogic {
     public boolean equals(Object obj) {
         if (obj instanceof AbstractType) {
             var o = (ScrabbleBool) obj;
-            return o.b == this.b;
+            return o.getValue() == this.getValue();
         }
         return obj instanceof AbstractType;
     }

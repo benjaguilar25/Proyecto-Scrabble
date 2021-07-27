@@ -93,7 +93,7 @@ public class ScrabbleString extends AbstractType {
     public boolean equals(Object obj) {
         if (obj instanceof AbstractType) {
             var o = (ScrabbleString) obj;
-            return o.s.equals(this.s);
+            return o.getValue().equals(this.getValue());
         }
         return obj instanceof AbstractType;
     }

@@ -287,7 +287,13 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
         String bin1 = b.getValue();
         String bin2 = this.getValue();
         int l = Math.max(bin1.length(), bin2.length());
-        String new_bin = normalizeBin(bin1, bin2);
+        if (bin1.length() < bin2.length()) {
+            bin1 = normalizeBin(bin1, bin2);
+        }
+        else if (bin2.length() < bin1.length()) {
+            bin2 = normalizeBin(bin1, bin2);
+        }
+        String new_bin = "";
 
         for (int i = 0; i < l; i++) {
             if (bin1.charAt(i) == '1' && bin2.charAt(i) == '1') {
@@ -321,7 +327,13 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
         String bin1 = b.getValue();
         String bin2 = this.getValue();
         int l = Math.max(bin1.length(), bin2.length());
-        String new_bin = normalizeBin(bin1, bin2);
+        if (bin1.length() < bin2.length()) {
+            bin1 = normalizeBin(bin1, bin2);
+        }
+        else if (bin2.length() < bin1.length()) {
+            bin2 = normalizeBin(bin1, bin2);
+        }
+        String new_bin = "";
 
         for (int i = 0; i < l; i++) {
             if (bin1.charAt(i) == '0' && bin2.charAt(i) == '0') {
@@ -342,19 +354,19 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
 
     // Method created to simplify and avoid mistakes when operating String binaries
     public String normalizeBin(String bin1, String bin2) {
-        String new_bin = "";
         int l = Math.max(bin1.length(), bin2.length());
         if (bin1.length() == l) {
             while (bin2.length() != l) {
                 bin2 = "0" + bin2;
             }
+            return bin2;
         }
         else {
             while (bin1.length() != l) {
                 bin1 = "0" + bin1;
             }
+            return bin1;
         }
-        return new_bin;
     }
 
     // section

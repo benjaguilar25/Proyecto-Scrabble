@@ -65,6 +65,7 @@ public class ScrabbleFloat extends AbstractType implements INumber {
 
     // Operating with ScrabbleFloat types leads to ScrabbleFloat types only as double java
     // primitive operated with other numbers can't be expressed as another primitive
+
     // floatOp methods are called returning a new ScrabbleFloat
     public ScrabbleFloat add(INumber adds) {
         return adds.floatAdd(this);

@@ -80,7 +80,6 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
         if (n < 0) {
             String bin_nFake = positiveIntToBinary(abs_n);
             String bin_n = positiveIntToBinary(abs_n - 1);
-            String new_bin = "";
             int l = Math.max(bin_nFake.length(), bin_n.length());
             if (bin_nFake.length() == l) {
                 while (bin_n.length() != l) {
