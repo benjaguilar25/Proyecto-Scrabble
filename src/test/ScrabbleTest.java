@@ -24,7 +24,7 @@ public class ScrabbleTest {
     private String strVal = "Text";
     private boolean boolVal = true;
     private double floatVal = 2.5;
-    private int intVal = 2;
+    private int intVal = -2;
     private String binVal = "01010";
 
     @BeforeEach
@@ -70,21 +70,65 @@ public class ScrabbleTest {
 
     @Test
     void boolTrans() {
+        var expectedSBool = new ScrabbleBool(boolVal);
+        var expectedSString = new ScrabbleString(String.valueOf(boolVal));
 
+        assertEquals(sBool.to_Bool(), expectedSBool);
+        assertEquals(sBool.to_String(), expectedSString);
     }
 
     @Test
     void floatTrans() {
+        var expectedSFloat = new ScrabbleFloat(floatVal);
+        var expectedSString = new ScrabbleString(String.valueOf(floatVal));
 
+        assertEquals(sFloat.to_Float(), expectedSFloat);
+        assertEquals(sFloat.to_String(), expectedSString);
     }
 
     @Test
     void intTrans() {
+        var expectedSInt = new ScrabbleInt(intVal);
+        var expectedSString = new ScrabbleString(String.valueOf(intVal));
+        var expectedSFloat = new ScrabbleFloat(Double.valueOf(intVal));
+        var expectedSBinary = new ScrabbleBinary(sInt.intToBinary(intVal));
 
+        assertEquals(sInt.to_Int(), expectedSInt);
+        assertEquals(sInt.to_String(), expectedSString);
+        assertEquals(sInt.to_Float(), expectedSFloat);
+        assertEquals(sInt.to_Binary(), expectedSBinary);
     }
 
     @Test
     void binTrans() {
+        var expectedSBin = new ScrabbleBinary(binVal);
+        var expectedSString = new ScrabbleString(binVal);
+        var expectedSFloat = new ScrabbleFloat(Double.parseDouble(String.valueOf(sBin.binToInt(binVal))));
+        var expectedSInt = new ScrabbleInt(sBin.binToInt(binVal));
+
+        assertEquals(sBin, expectedSBin);
+        assertEquals(sBin.to_String(), expectedSString);
+        assertEquals(sBin.to_Float(), expectedSFloat);
+        assertEquals(sBin.to_Int(), expectedSInt);
+    }
+
+    @Test
+    void stringOp() {
+        var expectedSString = new ScrabbleString(strVal + strVal);
+        var expectedSBool = new ScrabbleString(strVal + String.valueOf(boolVal));
+        var expectedSFloat = new ScrabbleString(strVal + String.valueOf(floatVal));
+        var expectedSInt = new ScrabbleString(strVal + String.valueOf(intVal));
+        var expectedSBin = new ScrabbleString(strVal + binVal);
+
+        assertEquals(sString.add(sString), expectedSString);
+        assertEquals(sString.add(sBool), expectedSBool);
+        assertEquals(sString.add(sFloat), expectedSFloat);
+        assertEquals(sString.add(sInt), expectedSInt);
+        assertEquals(sString.add(sBin), expectedSBin);
+    }
+
+    @Test
+    void boolOp() {
 
     }
 }
