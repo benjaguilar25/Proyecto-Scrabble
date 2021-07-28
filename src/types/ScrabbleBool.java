@@ -19,7 +19,6 @@ public class ScrabbleBool extends AbstractType implements ILogic {
 
     // ScrabbleBool type stores boolean java primitive
     private boolean b;
-
     public ScrabbleBool(boolean b) {
         this.b = b;
     }
@@ -59,7 +58,7 @@ public class ScrabbleBool extends AbstractType implements ILogic {
     // section - OPERATE
 
     // ScrabbleBool type can operate with every ILogic inherit type
-    // this operations specifically are Logic ones
+    // these operations specifically are Logic ones
     // including and, or & neg
     @Override
     public ILogic and(ILogic operand) {
@@ -93,7 +92,7 @@ public class ScrabbleBool extends AbstractType implements ILogic {
     }
 
     // ScrabbleBool type can be operated with every ILogic inherit type
-    // this operations specifically are Logic ones
+    // these operations specifically are Logic ones
     // including and, or & neg
     @Override
     public ILogic andBool(ScrabbleBool b) {

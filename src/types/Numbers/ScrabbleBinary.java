@@ -80,7 +80,7 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
 
     // section - AUX INT TRANSFORMATIONS
 
-    // This methods were delivered by the assignment's PDF
+    // These methods were delivered by the assignment's PDF
     // returns any String bin to int
 
     public int binToInt(String binary) {
@@ -141,7 +141,7 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
     }
 
     // ScrabbleBinary type can operate with every ILogic inherit type
-    // this operations specifically are Logic ones
+    // these operations specifically are Logic ones
     // including and, or & neg
     @Override
     public ILogic and(ILogic operand) {
@@ -264,7 +264,7 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
     }
 
     // ScrabbleBinary type can be operated with every ILogic inherit type
-    // this operations specifically are Logic ones
+    // these operations specifically are Logic ones
     // including and, or & neg
     @Override
     public ILogic andBool(ScrabbleBool b) {

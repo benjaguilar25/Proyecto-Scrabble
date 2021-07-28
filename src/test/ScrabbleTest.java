@@ -17,15 +17,19 @@ public class ScrabbleTest {
     private ScrabbleBool sBoolF;
     private ScrabbleFloat sFloat;
     private ScrabbleInt sInt;
+    private ScrabbleInt sInt2;
     private ScrabbleBinary sBin;
     private ScrabbleBinary sBin2;
+    private ScrabbleBinary sBinNeg;
 
     private String strVal = "Text";
     private boolean boolVal = true;
     private double floatVal = 10.0;
     private int intVal = 10;
+    private int intVal2 = -10;
     private String binVal = "01010";
     private String binVal2 = "0101";
+    private String negBinVal = "1010";
 
     @BeforeEach
     void setUp() {
@@ -34,8 +38,10 @@ public class ScrabbleTest {
         sBoolF = new ScrabbleBool(!boolVal);
         sFloat = new ScrabbleFloat(floatVal);
         sInt = new ScrabbleInt(intVal);
+        sInt2 = new ScrabbleInt(intVal2);
         sBin = new ScrabbleBinary(binVal);
         sBin2 = new ScrabbleBinary(binVal2);
+        sBinNeg = new ScrabbleBinary(negBinVal);
     }
 
     @Test
@@ -94,11 +100,13 @@ public class ScrabbleTest {
         var expectedSString = new ScrabbleString(String.valueOf(intVal));
         var expectedSFloat = new ScrabbleFloat(Double.valueOf(intVal));
         var expectedSBinary = new ScrabbleBinary(sInt.intToBinary(intVal));
+        var expectedNegSBinary = new ScrabbleBinary(sInt.intToBinary(intVal2));
 
         assertEquals(sInt.to_Int(), expectedSInt);
         assertEquals(sInt.to_String(), expectedSString);
         assertEquals(sInt.to_Float(), expectedSFloat);
         assertEquals(sInt.to_Binary(), expectedSBinary);
+        assertEquals(sInt2.to_Binary(), expectedNegSBinary);
     }
 
     @Test
@@ -107,11 +115,13 @@ public class ScrabbleTest {
         var expectedSString = new ScrabbleString(binVal);
         var expectedSFloat = new ScrabbleFloat(Double.parseDouble(String.valueOf(sBin.binToInt(binVal))));
         var expectedSInt = new ScrabbleInt(sBin.binToInt(binVal));
+        var expectedNegSInt = new ScrabbleInt(sBin.binToInt(negBinVal));
 
-        assertEquals(sBin, expectedSBin);
+        assertEquals(sBin.to_Binary(), expectedSBin);
         assertEquals(sBin.to_String(), expectedSString);
         assertEquals(sBin.to_Float(), expectedSFloat);
         assertEquals(sBin.to_Int(), expectedSInt);
+        assertEquals(sBinNeg.to_Int(), expectedNegSInt);
     }
 
     @Test
@@ -173,6 +183,22 @@ public class ScrabbleTest {
 
         // neg
         assertEquals(sBoolT.neg(), expectedSNeg);
+    }
+
+    @Test
+    void binAux() {
+        // neg_bin
+        String expectedString = "10101";
+
+        // normalizeBin
+        String toNormalize = "010";
+        String expectedNormalized = "00010";
+
+        // neg_bin
+        assertEquals(sBin.neg_binary(), expectedString);
+
+        // normalizeBin
+        assertEquals(sBin.normalizeBin(binVal, toNormalize), expectedNormalized);
     }
 
     @Test
@@ -327,15 +353,34 @@ public class ScrabbleTest {
 
         // and
         assertEquals(sBoolT.and(sBin), expectedBinAndTrue);
+        assertEquals(sBin.and(sBoolT), expectedBinAndTrue);
         assertEquals(sBoolF.and(sBin), expectedBinAndFalse);
+        assertEquals(sBin.and(sBoolF), expectedBinAndFalse);
         assertEquals(sBin.and(sBin2), expectedBinAndBin);
 
         // or
         assertEquals(sBoolT.or(sBin), expectedBinOrTrue);
+        assertEquals(sBin.or(sBoolT), expectedBinOrTrue);
         assertEquals(sBoolF.or(sBin), expectedBinOrFalse);
+        assertEquals(sBin.or(sBoolF), expectedBinOrFalse);
         assertEquals(sBin.or(sBin2), expectedBinOrBin);
 
         // neg
         assertEquals(sBin.neg(), expectedSNeg);
+    }
+
+    @Test
+    void toStringTest() {
+        String expectedStrStr = strVal;
+        String expectedBoolStr = String.valueOf(boolVal);
+        String expectedFloatStr = String.valueOf(floatVal);
+        String expectedIntStr = String.valueOf(intVal);
+        String expectedBinStr = binVal;
+
+        assertEquals(sString.toString(), expectedStrStr);
+        assertEquals(sBoolT.toString(), expectedBoolStr);
+        assertEquals(sFloat.toString(), expectedFloatStr);
+        assertEquals(sInt.toString(), expectedIntStr);
+        assertEquals(sBin.toString(), expectedBinStr);
     }
 }
