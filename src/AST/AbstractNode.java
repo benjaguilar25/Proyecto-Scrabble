@@ -2,7 +2,7 @@ package AST;
 
 import types.IType;
 
-public class AbstractNode implements INode {
+public abstract class AbstractNode implements INode {
     private INode izq;
     private INode der;
 

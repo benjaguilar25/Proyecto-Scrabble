@@ -3,6 +3,7 @@ package AST.operators;
 import AST.AbstractNode;
 import AST.INode;
 import types.IType;
+import types.Numbers.INumber;
 
 public class divNode extends AbstractNode {
 
@@ -16,8 +17,8 @@ public class divNode extends AbstractNode {
 
     @Override
     public IType eval() {
-        IType valIzq = getIzq().eval();
-        IType valDer = getDer().eval();
+        INumber valIzq = (INumber) getIzq().eval();
+        INumber valDer = (INumber) getDer().eval();
         if (valIzq != null && valDer != null) {
             return valIzq.nDivide(valDer);
         }
