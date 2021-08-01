@@ -1,6 +1,7 @@
 package types.Numbers;
 
 import types.AbstractType;
+import types.IType;
 import types.ScrabbleString;
 
 import java.util.Objects;
@@ -138,6 +139,37 @@ public class ScrabbleFloat extends AbstractType implements INumber {
     @Override
     public INumber intDivide(ScrabbleInt divided) {
         return new ScrabbleFloat(divided.to_Float().getValue() / this.getValue());
+    }
+
+    // section
+
+
+
+    // section - NODE
+
+    @Override
+    public IType nAdd(IType adds) {
+        return this.add((INumber) adds);
+    }
+
+    @Override
+    public IType nSubtract(IType subtracts) {
+        return this.subtract((INumber) subtracts);
+    }
+
+    @Override
+    public IType nMultiply(IType multiplies) {
+        return this.multiply((INumber) multiplies);
+    }
+
+    @Override
+    public IType nDivide(IType divides) {
+        return this.divide((INumber) divides);
+    }
+
+    @Override
+    public ScrabbleFloat eval() {
+        return this;
     }
 
     // section

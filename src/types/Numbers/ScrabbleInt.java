@@ -1,6 +1,7 @@
 package types.Numbers;
 
 import types.AbstractType;
+import types.IType;
 import types.ScrabbleString;
 
 import java.util.Objects;
@@ -235,6 +236,37 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
         int divide = divider.to_Int().getValue() / this.getValue();
         ScrabbleInt sDivide_int = new ScrabbleInt(divide);
         return sDivide_int.to_Binary();
+    }
+
+    // section
+
+
+
+    // section - NODE
+
+    @Override
+    public IType nAdd(IType adds) {
+        return (IType)this.add((INumber) adds);
+    }
+
+    @Override
+    public IType nSubtract(IType subtracts) {
+        return (IType)this.subtract((INumber) subtracts);
+    }
+
+    @Override
+    public IType nMultiply(IType multiplies) {
+        return (IType)this.multiply((INumber) multiplies);
+    }
+
+    @Override
+    public IType nDivide(IType divides) {
+        return (IType)this.divide((INumber) divides);
+    }
+
+    @Override
+    public ScrabbleInt eval() {
+        return this;
     }
 
     // section

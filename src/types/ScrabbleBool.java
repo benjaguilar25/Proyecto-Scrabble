@@ -140,6 +140,17 @@ public class ScrabbleBool extends AbstractType implements ILogic {
 
 
 
+    // section - NODE
+
+    @Override
+    public ScrabbleBool eval() {
+        return this;
+    }
+
+    // section
+
+
+
     // section - TOSTR DD
 
     // ToString method is overridden by one that returns a String value of the type

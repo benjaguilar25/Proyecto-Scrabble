@@ -2,6 +2,7 @@ package types.Numbers;
 
 import operators.ILogic;
 import types.AbstractType;
+import types.IType;
 import types.ScrabbleBool;
 import types.ScrabbleString;
 
@@ -367,6 +368,37 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
             }
             return bin1;
         }
+    }
+
+    // section
+
+
+
+    // section - NODE
+
+    @Override
+    public IType nAdd(IType adds) {
+        return (IType)this.add((IBinOperand)adds);
+    }
+
+    @Override
+    public IType nSubtract(IType subtracts) {
+        return (IType)this.subtract((IBinOperand)subtracts);
+    }
+
+    @Override
+    public IType nMultiply(IType multiplies) {
+        return (IType)this.multiply((IBinOperand)multiplies);
+    }
+
+    @Override
+    public IType nDivide(IType divides) {
+        return (IType)this.divide((IBinOperand)divides);
+    }
+
+    @Override
+    public ScrabbleBinary eval() {
+        return this;
     }
 
     // section
