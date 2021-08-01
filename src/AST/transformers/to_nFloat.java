@@ -20,6 +20,11 @@ public class to_nFloat extends AbstractTrans implements INode {
     }
 
     @Override
+    public INumber getNode() {
+        return this.node;
+    }
+
+    @Override
     public ScrabbleFloat eval() {
         if (getNode() == null) {
             return null;

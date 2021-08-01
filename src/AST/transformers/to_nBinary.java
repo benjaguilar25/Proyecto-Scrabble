@@ -3,9 +3,11 @@ package AST.transformers;
 import AST.AbstractTrans;
 import AST.INode;
 import operators.ILogic;
+import types.IType;
 import types.Numbers.IBinOperand;
 import types.Numbers.ScrabbleBinary;
 import types.ScrabbleBool;
+import types.ScrabbleString;
 
 public class to_nBinary extends AbstractTrans implements INode {
 
@@ -17,6 +19,11 @@ public class to_nBinary extends AbstractTrans implements INode {
 
     public to_nBinary() {
         this.node = null;
+    }
+
+    @Override
+    public IType getNode() {
+        return (IType) this.node;
     }
 
     @Override

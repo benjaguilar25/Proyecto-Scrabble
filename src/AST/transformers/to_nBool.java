@@ -20,6 +20,11 @@ public class to_nBool extends AbstractTrans implements INode {
     }
 
     @Override
+    public ScrabbleBool getNode() {
+        return this.node;
+    }
+
+    @Override
     public ScrabbleBool eval() {
         if (getNode() == null) {
             return null;
