@@ -70,6 +70,7 @@ public class ScrabbleBool extends AbstractType implements ILogic {
         return operand.orBool(this);
     }
 
+    @Override
     public ScrabbleBool neg() {
         if (this.getValue()) {
             return new ScrabbleBool(false);

@@ -1,6 +1,6 @@
 package test;
 import AST.INode;
-import AST.operators.addNode;
+import AST.operators.*;
 import AST.transformers.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -517,35 +517,70 @@ public class ScrabbleTest {
         var expectedBoolTrueAndTrue = new ScrabbleBool(boolVal && boolVal);
         var expectedBoolFalseAndTrue = new ScrabbleBool(!boolVal && boolVal);
         var expectedBinAndFalse = new ScrabbleBinary(binAndF);
-        var expectedBoolTrueAndFalse = new ScrabbleBool(boolVal && !boolVal);
 
         // or
         var expectedBinOrTrue = new ScrabbleBinary(binOrT);
         var expectedBoolTrueOrTrue = new ScrabbleBool(boolVal || boolVal);
         var expectedBoolFalseOrTrue = new ScrabbleBool(!boolVal || boolVal);
         var expectedBinOrFalse = new ScrabbleBinary(binVal);
-        var expectedBoolOrFalse = new ScrabbleBool(boolVal || !boolVal);
 
         // neg
         var expectedSNeg = new ScrabbleBool(!boolVal);
 
         // and
-        assertEquals(sBoolT.and(sBin), expectedBinAndTrue);
-        assertEquals(sBoolT.and(sBoolT), expectedBoolTrueAndTrue);
-        assertEquals(sBoolF.and(sBoolT), expectedBoolFalseAndTrue);
-        assertEquals(sBoolF.and(sBin), expectedBinAndFalse);
-        assertEquals(sBoolT.and(sBoolF), expectedBoolTrueAndFalse);
+        INode andTBin = new andNode(
+                sBoolT,
+                sBin
+        );
+        INode andTTrue = new andNode(
+                sBoolT,
+                sBoolT
+        );
+        INode andTFalse = new andNode(
+                sBoolT,
+                sBoolF
+        );
+        INode andFBin = new andNode(
+                sBoolF,
+                sBin
+        );
 
         // or
-        assertEquals(sBoolT.or(sBoolT), expectedBoolTrueAndTrue);
-        assertEquals(sBoolT.or(sBin), expectedBinOrTrue);
-        assertEquals(sBoolT.or(sBoolT), expectedBoolTrueOrTrue);
-        assertEquals(sBoolF.or(sBoolT), expectedBoolFalseOrTrue);
-        assertEquals(sBoolF.or(sBin), expectedBinOrFalse);
-        assertEquals(sBoolT.or(sBoolF), expectedBoolOrFalse);
+        INode orTBin = new orNode(
+                sBoolT,
+                sBin
+        );
+        INode orTTrue = new orNode(
+                sBoolT,
+                sBoolT
+        );
+        INode orTFalse = new orNode(
+                sBoolT,
+                sBoolF
+        );
+        INode orFBin = new orNode(
+                sBoolF,
+                sBin
+        );
 
         // neg
-        assertEquals(sBoolT.neg(), expectedSNeg);
+
+        INode negBool = new negNode(new ScrabbleBool(boolVal));
+
+        // and
+        assertEquals(andTBin.eval(), expectedBinAndTrue);
+        assertEquals(andTTrue.eval(), expectedBoolTrueAndTrue);
+        assertEquals(andTFalse.eval(), expectedBoolFalseAndTrue);
+        assertEquals(andFBin.eval(), expectedBinAndFalse);
+
+        // or
+        assertEquals(orTBin.eval(), expectedBinOrTrue);
+        assertEquals(orTTrue.eval(), expectedBoolTrueOrTrue);
+        assertEquals(orTFalse.eval(), expectedBoolFalseOrTrue);
+        assertEquals(orFBin.eval(), expectedBinOrFalse);
+
+        // neg
+        assertEquals(negBool.eval(), expectedSNeg);
     }
 
     @Test
@@ -571,24 +606,80 @@ public class ScrabbleTest {
         var expectedDivBinary = new ScrabbleFloat(floatVal / Double.parseDouble(String.valueOf(sBin.binToInt(binVal))));
 
         // add
-        assertEquals(sFloat.add(sFloat), expectedAddFloat);
-        assertEquals(sFloat.add(sInt), expectedAddInt);
-        assertEquals(sFloat.add(sBin), expectedAddBinary);
+        INode addFloat = new addNode(
+                sFloat,
+                sFloat
+        );
+        INode addInt = new addNode(
+                sFloat,
+                sInt
+        );
+        INode addBinary = new addNode(
+                sFloat,
+                sBin
+        );
 
         // subtract
-        assertEquals(sFloat.subtract(sFloat), expectedSubFloat);
-        assertEquals(sFloat.subtract(sInt), expectedSubInt);
-        assertEquals(sFloat.subtract(sBin), expectedSubBinary);
+        INode subFloat = new subNode(
+                sFloat,
+                sFloat
+        );
+        INode subInt = new subNode(
+                sFloat,
+                sInt
+        );
+        INode subBinary = new subNode(
+                sFloat,
+                sBin
+        );
 
         // multiply
-        assertEquals(sFloat.multiply(sFloat), expectedMulFloat);
-        assertEquals(sFloat.multiply(sInt), expectedMulInt);
-        assertEquals(sFloat.multiply(sBin), expectedMulBinary);
+        INode mulFloat = new mulNode(
+                sFloat,
+                sFloat
+        );
+        INode mulInt = new mulNode(
+                sFloat,
+                sInt
+        );
+        INode mulBinary = new mulNode(
+                sFloat,
+                sBin
+        );
 
         // divide
-        assertEquals(sFloat.divide(sFloat), expectedDivFloat);
-        assertEquals(sFloat.divide(sInt), expectedDivInt);
-        assertEquals(sFloat.divide(sBin), expectedDivBinary);
+        INode divFloat = new divNode(
+                sFloat,
+                sFloat
+        );
+        INode divInt = new divNode(
+                sFloat,
+                sInt
+        );
+        INode divBinary = new divNode(
+                sFloat,
+                sBin
+        );
+
+        // add
+        assertEquals(addFloat.eval(), expectedAddFloat);
+        assertEquals(addInt.eval(), expectedAddInt);
+        assertEquals(addBinary.eval(), expectedAddBinary);
+
+        // subtract
+        assertEquals(subFloat.eval(), expectedSubFloat);
+        assertEquals(subInt.eval(), expectedSubInt);
+        assertEquals(subBinary.eval(), expectedSubBinary);
+
+        // multiply
+        assertEquals(mulFloat.eval(), expectedMulFloat);
+        assertEquals(mulInt.eval(), expectedMulInt);
+        assertEquals(mulBinary.eval(), expectedMulBinary);
+
+        // divide
+        assertEquals(divFloat.eval(), expectedDivFloat);
+        assertEquals(divInt.eval(), expectedDivInt);
+        assertEquals(divBinary.eval(), expectedDivBinary);
     }
 
     @Test
@@ -614,24 +705,80 @@ public class ScrabbleTest {
         var expectedDivBinary = new ScrabbleInt(intVal / sBin.binToInt(binVal));
 
         // add
-        assertEquals(sInt.add(sFloat), expectedAddFloat);
-        assertEquals(sInt.add(sInt), expectedAddInt);
-        assertEquals(sInt.add(sBin), expectedAddBinary);
+        INode addFloat = new addNode(
+                sInt,
+                sFloat
+        );
+        INode addInt = new addNode(
+                sInt,
+                sInt
+        );
+        INode addBinary = new addNode(
+                sInt,
+                sBin
+        );
 
         // subtract
-        assertEquals(sInt.subtract(sFloat), expectedSubFloat);
-        assertEquals(sInt.subtract(sInt), expectedSubInt);
-        assertEquals(sInt.subtract(sBin), expectedSubBinary);
+        INode subFloat = new subNode(
+                sInt,
+                sFloat
+        );
+        INode subInt = new subNode(
+                sInt,
+                sInt
+        );
+        INode subBinary = new subNode(
+                sInt,
+                sBin
+        );
 
         // multiply
-        assertEquals(sInt.multiply(sFloat), expectedMulFloat);
-        assertEquals(sInt.multiply(sInt), expectedMulInt);
-        assertEquals(sInt.multiply(sBin), expectedMulBinary);
+        INode mulFloat = new mulNode(
+                sInt,
+                sFloat
+        );
+        INode mulInt = new mulNode(
+                sInt,
+                sInt
+        );
+        INode mulBinary = new mulNode(
+                sInt,
+                sBin
+        );
 
         // divide
-        assertEquals(sInt.divide(sFloat), expectedDivFloat);
-        assertEquals(sInt.divide(sInt), expectedDivInt);
-        assertEquals(sInt.divide(sBin), expectedDivBinary);
+        INode divFloat = new divNode(
+                sInt,
+                sFloat
+        );
+        INode divInt = new divNode(
+                sInt,
+                sInt
+        );
+        INode divBinary = new divNode(
+                sInt,
+                sBin
+        );
+
+        // add
+        assertEquals(addFloat.eval(), expectedAddFloat);
+        assertEquals(addInt.eval(), expectedAddInt);
+        assertEquals(addBinary.eval(), expectedAddBinary);
+
+        // subtract
+        assertEquals(subFloat.eval(), expectedSubFloat);
+        assertEquals(subInt.eval(), expectedSubInt);
+        assertEquals(subBinary.eval(), expectedSubBinary);
+
+        // multiply
+        assertEquals(mulFloat.eval(), expectedMulFloat);
+        assertEquals(mulInt.eval(), expectedMulInt);
+        assertEquals(mulBinary.eval(), expectedMulBinary);
+
+        // divide
+        assertEquals(divFloat.eval(), expectedDivFloat);
+        assertEquals(divInt.eval(), expectedDivInt);
+        assertEquals(divBinary.eval(), expectedDivBinary);
     }
 
     @Test
@@ -683,37 +830,106 @@ public class ScrabbleTest {
         var expectedSNeg = new ScrabbleBinary(binNeg);
 
         // add
-        assertEquals(sBin.add(sInt), expectedAddInt);
-        assertEquals(sBin.add(sBin2), expectedAddBinary);
+        INode addInt = new addNode(
+                sBin,
+                sInt
+        );
+        INode addBinary = new addNode(
+                sBin,
+                sBin2
+        );
 
         // subtract
-        assertEquals(sBin.subtract(sInt), expectedSubInt);
-        assertEquals(sBin.subtract(sBin2), expectedSubBinary);
+        INode subInt = new subNode(
+                sBin,
+                sInt
+        );
+        INode subBinary = new subNode(
+                sBin,
+                sBin2
+        );
 
         // multiply
-        assertEquals(sBin.multiply(sInt), expectedMulInt);
-        assertEquals(sBin.multiply(sBin2), expectedMulBinary);
+        INode mulInt = new mulNode(
+                sBin,
+                sInt
+        );
+        INode mulBinary = new mulNode(
+                sBin,
+                sBin2
+        );
 
         // divide
-        assertEquals(sBin.divide(sInt), expectedDivInt);
-        assertEquals(sBin.divide(sBin2), expectedDivBinary);
+        INode divInt = new divNode(
+                sBin,
+                sInt
+        );
+        INode divBinary = new divNode(
+                sBin,
+                sBin2
+        );
 
         // and
-        assertEquals(sBoolT.and(sBin), expectedBinAndTrue);
-        assertEquals(sBin.and(sBoolT), expectedBinAndTrue);
-        assertEquals(sBoolF.and(sBin), expectedBinAndFalse);
-        assertEquals(sBin.and(sBoolF), expectedBinAndFalse);
-        assertEquals(sBin.and(sBin2), expectedBinAndBin);
+        INode andBoolT = new andNode(
+                sBin,
+                sBoolT
+        );
+        INode andBoolF = new andNode(
+                sBin,
+                sBoolF
+        );
+        INode andBinary = new andNode(
+                sBin,
+                sBin2
+        );
 
         // or
-        assertEquals(sBoolT.or(sBin), expectedBinOrTrue);
-        assertEquals(sBin.or(sBoolT), expectedBinOrTrue);
-        assertEquals(sBoolF.or(sBin), expectedBinOrFalse);
-        assertEquals(sBin.or(sBoolF), expectedBinOrFalse);
-        assertEquals(sBin.or(sBin2), expectedBinOrBin);
+        INode orBoolT = new orNode(
+                sBin,
+                sBoolT
+        );
+        INode orBoolF = new orNode(
+                sBin,
+                sBoolF
+        );
+        INode orBinary = new orNode(
+                sBin,
+                sBin2
+        );
 
         // neg
-        assertEquals(sBin.neg(), expectedSNeg);
+        INode negBinary = new negNode(
+                sBin
+        );
+
+        // add
+        assertEquals(addInt.eval(), expectedAddInt);
+        assertEquals(addBinary.eval(), expectedAddBinary);
+
+        // subtract
+        assertEquals(subInt.eval(), expectedSubInt);
+        assertEquals(subBinary.eval(), expectedSubBinary);
+
+        // multiply
+        assertEquals(mulInt.eval(), expectedMulInt);
+        assertEquals(mulBinary.eval(), expectedMulBinary);
+
+        // divide
+        assertEquals(divInt.eval(), expectedDivInt);
+        assertEquals(divBinary.eval(), expectedDivBinary);
+
+        // and
+        assertEquals(andBoolT.eval(), expectedBinAndTrue);
+        assertEquals(andBoolF.eval(), expectedBinAndFalse);
+        assertEquals(andBinary.eval(), expectedBinAndBin);
+
+        // or
+        assertEquals(orBoolT.eval(), expectedBinOrTrue);
+        assertEquals(orBoolF.eval(), expectedBinOrFalse);
+        assertEquals(orBinary.eval(), expectedBinOrBin);
+
+        // neg
+        assertEquals(negBinary.eval(), expectedSNeg);
     }
 
 }

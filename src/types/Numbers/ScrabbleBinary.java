@@ -154,7 +154,8 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
         return operand.orBinary(this);
     }
 
-    public ScrabbleBinary neg() {
+    @Override
+    public ILogic neg() {
         return new ScrabbleBinary(this.neg_binary());
     }
 
