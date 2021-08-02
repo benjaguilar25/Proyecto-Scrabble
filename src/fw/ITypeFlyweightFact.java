@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class ITypeFlyweightFact {
 
     // section - DICTIONARIES FOR EACH ITYPE
-    // we used HashMap for better results 
+    // we used HashMap for better results
 
     private static final HashMap<String, ScrabbleString> sString = new HashMap<>();
     private static final HashMap<Boolean, ScrabbleBool> sBool = new HashMap<>();
