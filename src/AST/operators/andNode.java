@@ -5,8 +5,16 @@ import AST.INode;
 import operators.ILogic;
 import types.IType;
 
+// CLASS
+// andNode extends AbstractNode abstract class, which means
+// this operation can be evaluated the same way any INode does
+
+// stores : (INode left, INode right)
 public class andNode extends AbstractNode {
 
+    // section - INIT
+
+    // andNode type stores INode classes
     public andNode(INode izq, INode der) {
         super(izq, der);
     }
@@ -14,6 +22,12 @@ public class andNode extends AbstractNode {
     public andNode() {
         super();
     }
+
+    // section
+
+
+
+    // section - EVAL as ITYPE
 
     @Override
     public IType eval() {
@@ -36,4 +50,6 @@ public class andNode extends AbstractNode {
         }
         return null;
     }
+
+    // section
 }

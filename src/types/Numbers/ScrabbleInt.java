@@ -242,7 +242,7 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
 
 
 
-    // section - NODE
+    // section - DD NODE OPERATIONS
 
     @Override
     public IType nAdd(IType adds) {

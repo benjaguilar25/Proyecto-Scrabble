@@ -5,8 +5,16 @@ import AST.INode;
 import types.IType;
 import types.ScrabbleString;
 
+// CLASS
+// to_nString extends AbstractTrans abstract class, which means
+// this operation can be evaluated the same way any INode does
+
+// stores : IType node / null
 public class to_nString extends AbstractTrans implements INode {
 
+    // section - INIT
+
+    // to_nString operation stores IType classes or nothing
     private IType node;
 
     public to_nString(IType node) {
@@ -17,10 +25,22 @@ public class to_nString extends AbstractTrans implements INode {
         this.node = null;
     }
 
+    // section
+
+
+
+    // section - GETTERS
+
     @Override
     public INode getNode() {
         return this.node;
     }
+
+    // section
+
+
+
+    // section - EVAL as ITYPE
 
     @Override
     public ScrabbleString eval() {
@@ -30,4 +50,6 @@ public class to_nString extends AbstractTrans implements INode {
 
         return getNode().eval().to_String();
     }
+
+    // section
 }

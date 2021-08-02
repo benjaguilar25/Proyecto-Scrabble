@@ -141,7 +141,7 @@ public class ScrabbleBool extends AbstractType implements ILogic {
 
 
 
-    // section - NODE
+    // section - NODE EVAL
 
     @Override
     public ScrabbleBool eval() {

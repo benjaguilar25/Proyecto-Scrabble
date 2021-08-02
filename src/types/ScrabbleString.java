@@ -75,7 +75,7 @@ public class ScrabbleString extends AbstractType {
 
 
 
-    // section - NODE
+    // section - DD NODE OPERATIONS
 
 
     @Override

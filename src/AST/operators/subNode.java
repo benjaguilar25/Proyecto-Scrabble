@@ -5,8 +5,16 @@ import AST.INode;
 import types.IType;
 import types.Numbers.INumber;
 
+// CLASS
+// subNode extends AbstractNode abstract class, which means
+// this operation can be evaluated the same way any INode does
+
+// stores : (INode left, INode right)
 public class subNode extends AbstractNode {
 
+    // section - INIT
+
+    // subNode type stores INode classes
     public subNode(INode izq, INode der) {
         super(izq, der);
     }
@@ -14,6 +22,12 @@ public class subNode extends AbstractNode {
     public subNode() {
         super();
     }
+
+    // section
+
+
+
+    // section - EVAL as ITYPE
 
     @Override
     public IType eval() {
@@ -36,4 +50,6 @@ public class subNode extends AbstractNode {
         }
         return null;
     }
+
+    // section
 }

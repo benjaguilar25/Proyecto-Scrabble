@@ -145,7 +145,7 @@ public class ScrabbleFloat extends AbstractType implements INumber {
 
 
 
-    // section - NODE
+    // section - DD NODE OPERATIONS
 
     @Override
     public IType nAdd(IType adds) {

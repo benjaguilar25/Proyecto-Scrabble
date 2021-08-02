@@ -23,7 +23,7 @@ public abstract class AbstractType implements IType {
 
 
 
-    // section - NODE
+    // section - NODE OPERATIONS
 
 
     @Override

@@ -8,12 +8,28 @@ import types.ScrabbleString;
 
 import java.util.HashMap;
 
+// CLASS
+// ITypeFlyweightFact stores the types created by FlyClient
+// this will put the types in a dictionary with different id & value
+// only one attribute differ type will be created then called
 public class ITypeFlyweightFact {
+
+    // section - DICTIONARIES FOR EACH ITYPE
+    // we used HashMap for better results 
+
     private static final HashMap<String, ScrabbleString> sString = new HashMap<>();
     private static final HashMap<Boolean, ScrabbleBool> sBool = new HashMap<>();
     private static final HashMap<Double, ScrabbleFloat> sFloat = new HashMap<>();
     private static final HashMap<Integer, ScrabbleInt> sInt = new HashMap<>();
     private static final HashMap<String, ScrabbleBinary> sBin = new HashMap<>();
+
+    // section
+
+
+
+    // section - READ DICT
+    // this will seek for a possible created IType with same value
+    // as the one seeking it
 
     public static ScrabbleString getSString(String s) {
         if (sString.containsKey(s)) {
@@ -69,4 +85,6 @@ public class ITypeFlyweightFact {
             return SBin;
         }
     }
+
+    // section
 }
