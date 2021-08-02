@@ -17,8 +17,20 @@ public class mulNode extends AbstractNode {
 
     @Override
     public IType eval() {
-        INumber valIzq = (INumber) getIzq().eval();
-        INumber valDer = (INumber) getDer().eval();
+        INumber valIzq;
+        INumber valDer;
+        if (getIzq() == null) {
+            valIzq = null;
+        }
+        else {
+            valIzq = (INumber) getIzq().eval();
+        }
+        if (getDer() == null) {
+            valDer = null;
+        }
+        else {
+            valDer = (INumber) getDer().eval();
+        }
         if (valIzq != null && valDer != null) {
             return valIzq.nMultiply(valDer);
         }

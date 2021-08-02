@@ -16,11 +16,25 @@ public class addNode extends AbstractNode {
 
     @Override
     public IType eval() {
-        IType valIzq = getIzq().eval();
-        IType valDer = getDer().eval();
+        IType valIzq;
+        IType valDer;
+        if (getIzq() == null) {
+            valIzq = null;
+        }
+        else {
+            valIzq = getIzq().eval();
+        }
+        if (getDer() == null) {
+            valDer = null;
+        }
+        else {
+            valDer = getDer().eval();
+        }
         if (valIzq != null && valDer != null) {
             return valIzq.nAdd(valDer);
         }
-        return null;
+        else {
+            return null;
+        }
     }
 }

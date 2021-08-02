@@ -5,6 +5,7 @@ import AST.transformers.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import types.IType;
+import types.Numbers.IBinOperand;
 import types.Numbers.ScrabbleBinary;
 import types.Numbers.ScrabbleFloat;
 import types.Numbers.ScrabbleInt;
@@ -392,8 +393,10 @@ public class ScrabbleTest {
     void stringNodeTrans() {
         var expectedToString = new ScrabbleString(strVal);
 
+        INode transStringNull = new to_nString();
         INode transString = new to_nString(new ScrabbleString(strVal));
 
+        assertEquals(transStringNull.eval(), null);
         assertEquals(transString.eval(), expectedToString);
     }
 
@@ -402,10 +405,14 @@ public class ScrabbleTest {
         var expectedSBool = new ScrabbleBool(boolVal);
         var expectedSString = new ScrabbleString(String.valueOf(boolVal));
 
+        INode transBoolNull = new to_nBool();
         INode transBool = new to_nBool(new ScrabbleBool(boolVal));
+        INode transStringNull = new to_nString();
         INode transString = new to_nString(new ScrabbleBool(boolVal));
 
+        assertEquals(transBoolNull.eval(), null);
         assertEquals(transBool.eval(), expectedSBool);
+        assertEquals(transStringNull.eval(), null);
         assertEquals(transString.eval(), expectedSString);
     }
 
@@ -414,10 +421,14 @@ public class ScrabbleTest {
         var expectedSFloat = new ScrabbleFloat(floatVal);
         var expectedSString = new ScrabbleString(String.valueOf(floatVal));
 
+        INode transFloatNull = new to_nFloat();
         INode transFloat = new to_nFloat(new ScrabbleFloat(floatVal));
+        INode transStringNull = new to_nString();
         INode transString = new to_nString(new ScrabbleFloat(floatVal));
 
+        assertEquals(transFloatNull.eval(), null);
         assertEquals(transFloat.eval(), expectedSFloat);
+        assertEquals(transStringNull.eval(), null);
         assertEquals(transString.eval(), expectedSString);
     }
 
@@ -429,15 +440,23 @@ public class ScrabbleTest {
         var expectedSBinary = new ScrabbleBinary(sInt.intToBinary(intVal));
         var expectedNegSBinary = new ScrabbleBinary(sInt.intToBinary(intVal2));
 
+        INode transIntNull = new to_nInt();
         INode transInt = new to_nInt(new ScrabbleInt(intVal));
+        INode transStringNull = new to_nString();
         INode transString = new to_nString(new ScrabbleInt(intVal));
+        INode transFloatNull = new to_nFloat();
         INode transFloat = new to_nFloat(new ScrabbleInt(intVal));
+        INode transBinaryNull = new to_nBinary();
         INode transBinary = new to_nBinary(new ScrabbleInt(intVal));
         INode transNegBinary = new to_nBinary(new ScrabbleInt(intVal2));
 
+        assertEquals(transIntNull.eval(), null);
         assertEquals(transInt.eval(), expectedSInt);
+        assertEquals(transStringNull.eval(), null);
         assertEquals(transString.eval(), expectedSString);
+        assertEquals(transFloatNull.eval(), null);
         assertEquals(transFloat.eval(), expectedSFloat);
+        assertEquals(transBinaryNull.eval(), null);
         assertEquals(transBinary.eval(), expectedSBinary);
         assertEquals(transNegBinary.eval(), expectedNegSBinary);
     }
@@ -450,15 +469,23 @@ public class ScrabbleTest {
         var expectedSInt = new ScrabbleInt(sBin.binToInt(binVal));
         var expectedNegSInt = new ScrabbleInt(sBin.binToInt(negBinVal));
 
+        INode transBinNull = new to_nBinary();
         INode transBin = new to_nBinary(new ScrabbleBinary(binVal));
+        INode transStringNull = new to_nString();
         INode transString = new to_nString(new ScrabbleBinary(binVal));
+        INode transFloatNull = new to_nFloat();
         INode transFloat = new to_nFloat(new ScrabbleBinary(binVal));
+        INode transIntNull = new to_nInt();
         INode transInt = new to_nInt(new ScrabbleBinary(binVal));
         INode transNegInt = new to_nInt(new ScrabbleBinary(negBinVal));
 
+        assertEquals(transBinNull.eval(), null);
         assertEquals(transBin.eval(), expectedSBin);
+        assertEquals(transStringNull.eval(), null);
         assertEquals(transString.eval(), expectedSString);
+        assertEquals(transFloatNull.eval(), null);
         assertEquals(transFloat.eval(), expectedSFloat);
+        assertEquals(transIntNull.eval(), null);
         assertEquals(transInt.eval(), expectedSInt);
         assertEquals(transNegInt.eval(), expectedNegSInt);
     }
@@ -473,6 +500,10 @@ public class ScrabbleTest {
         var expectedSBin = new ScrabbleString(strVal + binVal);
 
         // add
+        INode addNull = new addNode(
+                sString,
+                new addNode()
+        );
         INode addString = new addNode(
                 sString,
                 sString
@@ -493,12 +524,14 @@ public class ScrabbleTest {
                 sString,
                 sInt
         );
+
         IType addStringVal = addString.eval();
         IType addBoolVal = addBool.eval();
         IType addBinaryVal = addBinary.eval();
         IType addFloatVal = addFloat.eval();
         IType addIntVal = addInt.eval();
 
+        assertEquals(addNull.eval(), null);
         assertEquals(addStringVal, expectedSString);
         assertEquals(addBoolVal, expectedSBool);
         assertEquals(addBinaryVal, expectedSBin);
@@ -528,6 +561,10 @@ public class ScrabbleTest {
         var expectedSNeg = new ScrabbleBool(!boolVal);
 
         // and
+        INode andNull = new andNode(
+                sBoolT,
+                new andNode()
+        );
         INode andTBin = new andNode(
                 sBoolT,
                 sBin
@@ -546,6 +583,10 @@ public class ScrabbleTest {
         );
 
         // or
+        INode orNull = new orNode(
+                sBoolT,
+                new orNode()
+        );
         INode orTBin = new orNode(
                 sBoolT,
                 sBin
@@ -568,12 +609,14 @@ public class ScrabbleTest {
         INode negBool = new negNode(new ScrabbleBool(boolVal));
 
         // and
+        assertEquals(andNull.eval(), null);
         assertEquals(andTBin.eval(), expectedBinAndTrue);
         assertEquals(andTTrue.eval(), expectedBoolTrueAndTrue);
         assertEquals(andTFalse.eval(), expectedBoolFalseAndTrue);
         assertEquals(andFBin.eval(), expectedBinAndFalse);
 
         // or
+        assertEquals(orNull.eval(), null);
         assertEquals(orTBin.eval(), expectedBinOrTrue);
         assertEquals(orTTrue.eval(), expectedBoolTrueOrTrue);
         assertEquals(orTFalse.eval(), expectedBoolFalseOrTrue);
@@ -606,6 +649,10 @@ public class ScrabbleTest {
         var expectedDivBinary = new ScrabbleFloat(floatVal / Double.parseDouble(String.valueOf(sBin.binToInt(binVal))));
 
         // add
+        INode addNull = new addNode(
+                sFloat,
+                new addNode()
+        );
         INode addFloat = new addNode(
                 sFloat,
                 sFloat
@@ -620,6 +667,10 @@ public class ScrabbleTest {
         );
 
         // subtract
+        INode subNull = new subNode(
+                sFloat,
+                new subNode()
+        );
         INode subFloat = new subNode(
                 sFloat,
                 sFloat
@@ -634,6 +685,10 @@ public class ScrabbleTest {
         );
 
         // multiply
+        INode mulNull = new mulNode(
+                sFloat,
+                new mulNode()
+        );
         INode mulFloat = new mulNode(
                 sFloat,
                 sFloat
@@ -648,6 +703,10 @@ public class ScrabbleTest {
         );
 
         // divide
+        INode divNull = new divNode(
+                sFloat,
+                new divNode()
+        );
         INode divFloat = new divNode(
                 sFloat,
                 sFloat
@@ -662,21 +721,25 @@ public class ScrabbleTest {
         );
 
         // add
+        assertEquals(addNull.eval(), null);
         assertEquals(addFloat.eval(), expectedAddFloat);
         assertEquals(addInt.eval(), expectedAddInt);
         assertEquals(addBinary.eval(), expectedAddBinary);
 
         // subtract
+        assertEquals(subNull.eval(), null);
         assertEquals(subFloat.eval(), expectedSubFloat);
         assertEquals(subInt.eval(), expectedSubInt);
         assertEquals(subBinary.eval(), expectedSubBinary);
 
         // multiply
+        assertEquals(mulNull.eval(), null);
         assertEquals(mulFloat.eval(), expectedMulFloat);
         assertEquals(mulInt.eval(), expectedMulInt);
         assertEquals(mulBinary.eval(), expectedMulBinary);
 
         // divide
+        assertEquals(divNull.eval(), null);
         assertEquals(divFloat.eval(), expectedDivFloat);
         assertEquals(divInt.eval(), expectedDivInt);
         assertEquals(divBinary.eval(), expectedDivBinary);
@@ -705,6 +768,10 @@ public class ScrabbleTest {
         var expectedDivBinary = new ScrabbleInt(intVal / sBin.binToInt(binVal));
 
         // add
+        INode addNull = new addNode(
+                sInt,
+                new addNode()
+        );
         INode addFloat = new addNode(
                 sInt,
                 sFloat
@@ -719,6 +786,10 @@ public class ScrabbleTest {
         );
 
         // subtract
+        INode subNull = new subNode(
+                sInt,
+                new subNode()
+        );
         INode subFloat = new subNode(
                 sInt,
                 sFloat
@@ -733,6 +804,10 @@ public class ScrabbleTest {
         );
 
         // multiply
+        INode mulNull = new mulNode(
+                sInt,
+                new mulNode()
+        );
         INode mulFloat = new mulNode(
                 sInt,
                 sFloat
@@ -747,6 +822,10 @@ public class ScrabbleTest {
         );
 
         // divide
+        INode divNull = new divNode(
+                sInt,
+                new divNode()
+        );
         INode divFloat = new divNode(
                 sInt,
                 sFloat
@@ -761,21 +840,25 @@ public class ScrabbleTest {
         );
 
         // add
+        assertEquals(addNull.eval(), null);
         assertEquals(addFloat.eval(), expectedAddFloat);
         assertEquals(addInt.eval(), expectedAddInt);
         assertEquals(addBinary.eval(), expectedAddBinary);
 
         // subtract
+        assertEquals(subNull.eval(), null);
         assertEquals(subFloat.eval(), expectedSubFloat);
         assertEquals(subInt.eval(), expectedSubInt);
         assertEquals(subBinary.eval(), expectedSubBinary);
 
         // multiply
+        assertEquals(mulNull.eval(), null);
         assertEquals(mulFloat.eval(), expectedMulFloat);
         assertEquals(mulInt.eval(), expectedMulInt);
         assertEquals(mulBinary.eval(), expectedMulBinary);
 
         // divide
+        assertEquals(subNull.eval(), null);
         assertEquals(divFloat.eval(), expectedDivFloat);
         assertEquals(divInt.eval(), expectedDivInt);
         assertEquals(divBinary.eval(), expectedDivBinary);
@@ -830,6 +913,10 @@ public class ScrabbleTest {
         var expectedSNeg = new ScrabbleBinary(binNeg);
 
         // add
+        INode addNull = new addNode(
+                sBin,
+                new addNode()
+        );
         INode addInt = new addNode(
                 sBin,
                 sInt
@@ -840,6 +927,10 @@ public class ScrabbleTest {
         );
 
         // subtract
+        INode subNull = new subNode(
+                sBin,
+                new subNode()
+        );
         INode subInt = new subNode(
                 sBin,
                 sInt
@@ -850,6 +941,10 @@ public class ScrabbleTest {
         );
 
         // multiply
+        INode mulNull = new mulNode(
+                sBin,
+                new mulNode()
+        );
         INode mulInt = new mulNode(
                 sBin,
                 sInt
@@ -860,6 +955,10 @@ public class ScrabbleTest {
         );
 
         // divide
+        INode divNull = new divNode(
+                sBin,
+                new divNode()
+        );
         INode divInt = new divNode(
                 sBin,
                 sInt
@@ -870,6 +969,10 @@ public class ScrabbleTest {
         );
 
         // and
+        INode andNull = new andNode(
+                sBin,
+                new andNode()
+        );
         INode andBoolT = new andNode(
                 sBin,
                 sBoolT
@@ -884,6 +987,10 @@ public class ScrabbleTest {
         );
 
         // or
+        INode orNull = new orNode(
+                sBin,
+                new orNode()
+        );
         INode orBoolT = new orNode(
                 sBin,
                 sBoolT
@@ -898,38 +1005,65 @@ public class ScrabbleTest {
         );
 
         // neg
+        INode negNull = new negNode();
         INode negBinary = new negNode(
                 sBin
         );
 
         // add
+        assertEquals(addNull.eval(), null);
         assertEquals(addInt.eval(), expectedAddInt);
         assertEquals(addBinary.eval(), expectedAddBinary);
 
         // subtract
+        assertEquals(subNull.eval(), null);
         assertEquals(subInt.eval(), expectedSubInt);
         assertEquals(subBinary.eval(), expectedSubBinary);
 
         // multiply
+        assertEquals(mulNull.eval(), null);
         assertEquals(mulInt.eval(), expectedMulInt);
         assertEquals(mulBinary.eval(), expectedMulBinary);
 
         // divide
+        assertEquals(divNull.eval(), null);
         assertEquals(divInt.eval(), expectedDivInt);
         assertEquals(divBinary.eval(), expectedDivBinary);
 
         // and
+        assertEquals(andNull.eval(), null);
         assertEquals(andBoolT.eval(), expectedBinAndTrue);
         assertEquals(andBoolF.eval(), expectedBinAndFalse);
         assertEquals(andBinary.eval(), expectedBinAndBin);
 
         // or
+        assertEquals(orNull.eval(), null);
         assertEquals(orBoolT.eval(), expectedBinOrTrue);
         assertEquals(orBoolF.eval(), expectedBinOrFalse);
         assertEquals(orBinary.eval(), expectedBinOrBin);
 
         // neg
+        assertEquals(negNull.eval(), null);
         assertEquals(negBinary.eval(), expectedSNeg);
+    }
+
+    @Test
+    void pdfProblemTest() {
+        var expectedResult = new ScrabbleFloat(34.9);
+
+        INode problem = new addNode(
+                new ScrabbleFloat(6.9),
+                new orNode(
+                        new ScrabbleBinary("1000"),
+                        new to_nBinary((IBinOperand) new subNode(
+                                new ScrabbleInt(25),
+                                new ScrabbleBinary("0101")
+                        ).eval())
+                )
+
+        );
+
+        assertEquals(problem.eval(), expectedResult);
     }
 
 }

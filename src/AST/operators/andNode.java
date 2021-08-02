@@ -17,8 +17,20 @@ public class andNode extends AbstractNode {
 
     @Override
     public IType eval() {
-        ILogic valIzq = (ILogic) getIzq().eval();
-        ILogic valDer = (ILogic) getDer().eval();
+        ILogic valIzq;
+        ILogic valDer;
+        if (getIzq() == null) {
+            valIzq = null;
+        }
+        else {
+            valIzq = (ILogic) getIzq().eval();
+        }
+        if (getDer() == null) {
+            valDer = null;
+        }
+        else {
+            valDer = (ILogic) getDer().eval();
+        }
         if (valIzq != null && valDer != null) {
             return (IType) valIzq.and(valDer);
         }
