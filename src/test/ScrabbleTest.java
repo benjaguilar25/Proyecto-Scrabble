@@ -394,6 +394,8 @@ public class ScrabbleTest {
         assertEquals(sBin.toString(), expectedBinStr);
     }
 
+    // section - NODE
+
     @Test
     void stringNodeTrans() {
         var expectedToString = new ScrabbleString(strVal);
@@ -1053,9 +1055,104 @@ public class ScrabbleTest {
     }
 
     @Test
+    void wrongOpTest() {
+        // if we try to operate in a different way our construction
+        // of scrabble was made, the result for this
+        // and all cases will be null
+
+
+        // float wrong op example
+        INode floatBoolAdd = new addNode(
+                sFloat,
+                sBoolT
+        );
+        INode floatBoolSubtract = new subNode(
+                sFloat,
+                sBoolT
+        );
+        INode floatBoolMultiply = new mulNode(
+                sFloat,
+                sBoolT
+        );
+        INode floatBoolDivide = new divNode(
+                sFloat,
+                sBoolT
+        );
+
+        // int wrong op example
+        INode intStringAdd = new addNode(
+                sInt,
+                sString
+        );
+        INode intStringSubtract = new subNode(
+                sInt,
+                sString
+        );
+        INode intStringMultiply = new mulNode(
+                sInt,
+                sString
+        );
+        INode intStringDivide = new divNode(
+                sInt,
+                sString
+        );
+
+        // bin wrong op example
+        INode binFloatAdd = new addNode(
+                sBin,
+                sFloat
+        );
+        INode binFloatSubtract = new subNode(
+                sBin,
+                sFloat
+        );
+        INode binFloatMultiply = new mulNode(
+                sBin,
+                sFloat
+        );
+        INode binFloatDivide = new divNode(
+                sBin,
+                sFloat
+        );
+
+        // asserts
+        assertEquals(floatBoolAdd.eval(), null);
+        assertEquals(floatBoolSubtract.eval(), null);
+        assertEquals(floatBoolMultiply.eval(), null);
+        assertEquals(floatBoolDivide.eval(), null);
+
+        assertEquals(intStringAdd.eval(), null);
+        assertEquals(intStringSubtract.eval(), null);
+        assertEquals(intStringMultiply.eval(), null);
+        assertEquals(intStringDivide.eval(), null);
+
+        assertEquals(binFloatAdd.eval(), null);
+        assertEquals(binFloatSubtract.eval(), null);
+        assertEquals(binFloatMultiply.eval(), null);
+        assertEquals(binFloatDivide.eval(), null);
+
+    }
+
+    @Test
     void pdfProblemTest() {
         var expectedResult = new ScrabbleFloat(34.9);
 
+        // In this case, as operations in the form of 'Binary + Float'
+        // are not allowed, we return null for the whole operation
+        INode problemNull = new addNode(
+                new orNode(
+                        new ScrabbleBinary("1000"),
+                        new to_nBinary((IBinOperand) new subNode(
+                                new ScrabbleInt(25),
+                                new ScrabbleBinary("0101")
+                        ).eval())
+                ),
+                new ScrabbleFloat(6.9)
+        );
+
+        // but if we make a slight change in the way the operation is written
+        // as 'Float + Binary', it will return the value we were expecting
+        // just as the PDF result : 34.9
         INode problem = new addNode(
                 new ScrabbleFloat(6.9),
                 new orNode(
@@ -1065,12 +1162,15 @@ public class ScrabbleTest {
                                 new ScrabbleBinary("0101")
                         ).eval())
                 )
-
         );
 
+        assertEquals(problemNull.eval(), null);
         assertEquals(problem.eval(), expectedResult);
     }
 
+    // flyweight factory test
+    // we check that types can store and iterate instead of
+    // creating a new one every time we need a new ScrabbleType
     @Test
     void flyweightTest() {
         var sStr_1 = client.sStringFactory(strVal);

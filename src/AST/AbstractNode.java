@@ -2,6 +2,9 @@ package AST;
 
 import types.IType;
 
+// ABSTRACT CLASS
+// This abstract class allude -as the interface- to ABS Nodes
+// In this case, this will be inherited to all different node castings
 public abstract class AbstractNode extends AbstractTrans implements INode {
     private INode izq;
     private INode der;

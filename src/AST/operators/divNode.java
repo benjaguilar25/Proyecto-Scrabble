@@ -17,19 +17,19 @@ public class divNode extends AbstractNode {
 
     @Override
     public IType eval() {
-        INumber valIzq;
-        INumber valDer;
+        IType valIzq;
+        IType valDer;
         if (getIzq() == null) {
             valIzq = null;
         }
         else {
-            valIzq = (INumber) getIzq().eval();
+            valIzq = getIzq().eval();
         }
         if (getDer() == null) {
             valDer = null;
         }
         else {
-            valDer = (INumber) getDer().eval();
+            valDer = getDer().eval();
         }
         if (valIzq != null && valDer != null) {
             return valIzq.nDivide(valDer);

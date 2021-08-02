@@ -2,6 +2,8 @@ package AST;
 
 import types.IType;
 
+
+
 public abstract class AbstractTrans implements INode {
 
     private INode node;

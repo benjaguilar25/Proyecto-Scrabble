@@ -246,21 +246,33 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
 
     @Override
     public IType nAdd(IType adds) {
+        if (!(adds instanceof INumber)) {
+            return null;
+        }
         return (IType)this.add((INumber) adds);
     }
 
     @Override
     public IType nSubtract(IType subtracts) {
+        if (!(subtracts instanceof INumber)) {
+            return null;
+        }
         return (IType)this.subtract((INumber) subtracts);
     }
 
     @Override
     public IType nMultiply(IType multiplies) {
+        if (!(multiplies instanceof INumber)) {
+            return null;
+        }
         return (IType)this.multiply((INumber) multiplies);
     }
 
     @Override
     public IType nDivide(IType divides) {
+        if (!(divides instanceof INumber)) {
+            return null;
+        }
         return (IType)this.divide((INumber) divides);
     }
 

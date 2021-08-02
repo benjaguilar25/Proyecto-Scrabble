@@ -379,21 +379,33 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
 
     @Override
     public IType nAdd(IType adds) {
-        return (IType)this.add((IBinOperand)adds);
+        if (!(adds instanceof IBinOperand)) {
+            return null;
+        }
+        return (IType)this.add((IBinOperand) adds);
     }
 
     @Override
     public IType nSubtract(IType subtracts) {
+        if (!(subtracts instanceof IBinOperand)) {
+            return null;
+        }
         return (IType)this.subtract((IBinOperand)subtracts);
     }
 
     @Override
     public IType nMultiply(IType multiplies) {
+        if (!(multiplies instanceof IBinOperand)) {
+            return null;
+        }
         return (IType)this.multiply((IBinOperand)multiplies);
     }
 
     @Override
     public IType nDivide(IType divides) {
+        if (!(divides instanceof IBinOperand)) {
+            return null;
+        }
         return (IType)this.divide((IBinOperand)divides);
     }
 
