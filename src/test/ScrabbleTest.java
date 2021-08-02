@@ -2,6 +2,7 @@ package test;
 import AST.INode;
 import AST.operators.*;
 import AST.transformers.*;
+import fw.FlyClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import types.IType;
@@ -36,6 +37,8 @@ public class ScrabbleTest {
     private String binVal2 = "0101";
     private String negBinVal = "1010";
 
+    private FlyClient client;
+
     @BeforeEach
     void setUp() {
         sString = new ScrabbleString(strVal);
@@ -47,6 +50,8 @@ public class ScrabbleTest {
         sBin = new ScrabbleBinary(binVal);
         sBin2 = new ScrabbleBinary(binVal2);
         sBinNeg = new ScrabbleBinary(negBinVal);
+
+        client = new FlyClient();
     }
 
     @Test
@@ -1064,6 +1069,39 @@ public class ScrabbleTest {
         );
 
         assertEquals(problem.eval(), expectedResult);
+    }
+
+    @Test
+    void flyweightTest() {
+        var sStr_1 = client.sStringFactory(strVal);
+        var sStr_2 = client.sStringFactory(strVal);
+
+        var sBool_1 = client.sBoolFactory(boolVal);
+        var sBool_2 = client.sBoolFactory(boolVal);
+
+        var sFloat_1 = client.sFloatFactory(floatVal);
+        var sFloat_2 = client.sFloatFactory(floatVal);
+
+        var sInt_1 = client.sIntFactory(intVal);
+        var sInt_2 = client.sIntFactory(intVal);
+
+        var sBin_1 = client.sBinaryFactory(binVal);
+        var sBin_2 = client.sBinaryFactory(binVal);
+
+        assertEquals(sStr_1, sStr_2);
+        assertEquals(sStr_1.getValue(), sStr_2.getValue());
+
+        assertEquals(sBool_1, sBool_2);
+        assertEquals(sBool_1.getValue(), sBool_2.getValue());
+
+        assertEquals(sFloat_1, sFloat_2);
+        assertEquals(sFloat_1.getValue(), sFloat_2.getValue());
+
+        assertEquals(sInt_1, sInt_2);
+        assertEquals(sInt_1.getValue(), sInt_2.getValue());
+
+        assertEquals(sBin_1, sBin_2);
+        assertEquals(sBin_1.getValue(), sBin_2.getValue());
     }
 
 }
