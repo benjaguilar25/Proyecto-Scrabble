@@ -31,6 +31,7 @@ public class whileNode implements INode {
     @Override
     public IType eval() {
         while (cond.getValue() == true) {
+
             whileTrue.eval();
         }
         return null;
