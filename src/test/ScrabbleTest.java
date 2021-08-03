@@ -2,6 +2,9 @@ package test;
 import AST.INode;
 import AST.operators.*;
 import AST.transformers.*;
+import flowControl.ifNode;
+import flowControl.operators.CompareTo;
+import flowControl.whileNode;
 import fw.FlyClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,6 +42,10 @@ public class ScrabbleTest {
 
     private FlyClient client;
 
+    private CompareTo sCompare;
+    private CompareTo sCompare2;
+    private CompareTo sCompare3;
+
     @BeforeEach
     void setUp() {
         sString = new ScrabbleString(strVal);
@@ -52,6 +59,7 @@ public class ScrabbleTest {
         sBinNeg = new ScrabbleBinary(negBinVal);
 
         client = new FlyClient();
+
     }
 
     @Test
@@ -1203,5 +1211,77 @@ public class ScrabbleTest {
         assertEquals(sBin_1, sBin_2);
         assertEquals(sBin_1.getValue(), sBin_2.getValue());
     }
+
+    @Test
+    void compareToOp() {
+        var expectedCompare_1 = new ScrabbleInt(1);
+        var expectedCompare_2 = new ScrabbleInt(0);
+        var expectedCompare_3 = new ScrabbleInt(-1);
+
+        sCompare = new CompareTo(sBin, sInt2);
+        sCompare2 = new CompareTo(sFloat, sFloat);
+        sCompare3 = new CompareTo(sBin2, sFloat);
+
+        assertEquals(sCompare.eval(), expectedCompare_1);
+        assertEquals(sCompare2.eval(), expectedCompare_2);
+        assertEquals(sCompare3.eval(), expectedCompare_3);
+    }
+
+    @Test
+    void ifNodeTest() {
+        var expectedResult1 = new ScrabbleInt(intVal - 1);
+        var expectedResult2 = new ScrabbleInt(intVal2 + 1);
+        var correctIf = new ScrabbleInt(1);
+        ScrabbleInt comparison1 = (ScrabbleInt) new CompareTo(sInt, sInt2).eval();
+        ScrabbleInt comparison2 = (ScrabbleInt) new CompareTo(sInt2, sInt).eval();
+
+        INode ifTrueAST = new ifNode(
+                new ScrabbleBool(comparison1.getValue() == correctIf.getValue()),
+                new subNode(
+                        sInt,
+                        correctIf
+                ),
+                new addNode(
+                        sInt2,
+                        correctIf
+                )
+        );
+
+        INode ifFalseAST = new ifNode(
+                new ScrabbleBool(comparison2.getValue() == correctIf.getValue()),
+                new subNode(
+                        sInt,
+                        correctIf
+                ),
+                new addNode(
+                        sInt2,
+                        correctIf
+                )
+        );
+
+        assertEquals(ifTrueAST.eval(), expectedResult1);
+        assertEquals(ifFalseAST.eval(), expectedResult2);
+    }
+
+
+    @Test
+    void whileNodeTest() {
+        var expectedResult1 = new ScrabbleInt(intVal2);
+        var expectedResult2 = new ScrabbleInt(intVal2 + 1);
+        var correctIf = new ScrabbleInt(1);
+        ScrabbleInt comparison1 = (ScrabbleInt) new CompareTo(sInt, sInt2).eval();
+        ScrabbleInt comparison2 = (ScrabbleInt) new CompareTo(sInt2, sInt).eval();
+
+        INode whileAST = new whileNode(
+                new ScrabbleBool(comparison1.getValue() == correctIf.getValue()),
+                new subNode(
+                        sInt,
+                        correctIf
+                )
+        );
+
+        assertEquals(whileAST.eval(), expectedResult1);
+    }
+
 
 }

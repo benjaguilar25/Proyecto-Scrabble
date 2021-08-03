@@ -5,7 +5,7 @@ import types.IType;
 // INTERFACE
 // This interface allude to Number types, which extends IType
 // implemented to (ScrabbleInt, ScrabbleFloat, ScrabbleInt, ScrabbleBinary)
-public interface INumber extends IType {
+public interface INumber extends IType, Comparable<INumber> {
 
     // section - TRANSFORMATIONS
 
@@ -33,6 +33,15 @@ public interface INumber extends IType {
     INumber intSubtract(ScrabbleInt subtracted);
     INumber intMultiply(ScrabbleInt multiplied);
     INumber intDivide(ScrabbleInt divided);
+
+    // section
+
+
+
+    // section - COMPARETO
+
+    @Override
+    int compareTo(INumber o);
 
     // section
 }

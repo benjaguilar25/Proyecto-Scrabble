@@ -3,8 +3,10 @@ package AST;
 // INTERFACE
 
 import types.IType;
+import types.Numbers.INumber;
+import types.Numbers.ScrabbleInt;
 
-// This interface allude to Nodes in ABS
+// This interface alludes to Nodes in ABS
 // every node has two values attached to it as (INode left, INode right)
 // and can be evaluated in a IType from Scrabble
 // inherited (not implemented explicitly) to
@@ -18,4 +20,5 @@ public interface INode {
     IType eval();
 
     // section
+
 }

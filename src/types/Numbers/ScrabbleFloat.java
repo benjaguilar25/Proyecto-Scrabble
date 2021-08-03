@@ -188,6 +188,27 @@ public class ScrabbleFloat extends AbstractType implements INumber {
 
 
 
+    // section - COMPARETO
+
+    @Override
+    public int compareTo(INumber o) {
+        ScrabbleFloat type1 = this;
+        ScrabbleFloat type2 = o.to_Float();
+
+        if (type1.getValue() > type2.getValue()) {
+            return 1;
+        }
+        else if (type1.getValue() < type2.getValue()) {
+            return -1;
+        }
+
+        return 0;
+    }
+
+    // section
+
+
+
     // section - TOSTR DD
 
     // ToString method is overridden by one that returns a String value of the type

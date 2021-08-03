@@ -4,7 +4,7 @@ package types;
 
 import AST.INode;
 
-// This interface allude to Types in Scrabble
+// This interface alludes to Types in Scrabble
 // every type has a value attached to it as a String, boolean, double, int
 // inherited (not implemented explicitly) to
 // AbstractType, ScrabbleString, ScrabbleBool, ScrabbleFloat, ScrabbleInt, ScrabbleBinary
