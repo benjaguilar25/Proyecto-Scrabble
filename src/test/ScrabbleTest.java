@@ -1264,6 +1264,15 @@ public class ScrabbleTest {
     }
 
 
+    /**
+     * se quiso testear pero dentro de la clase whileNode
+     * no se pudo descubrir como actualizar la condición
+     * ya que esta se almacena en ScrabbleBool y no se
+     * puede acceder a los parámetros de forma independiente
+     *
+     * si se hubiese podido, lo ideal hubiera sido
+     * actualizar una de las variables hasta que la cond
+     * no se cumpla y terminar el ciclo
     @Test
     void whileNodeTest() {
         var expectedResult1 = new ScrabbleInt(intVal2);
@@ -1282,6 +1291,5 @@ public class ScrabbleTest {
 
         assertEquals(whileAST.eval(), expectedResult1);
     }
-
-
+    */
 }
