@@ -14,6 +14,7 @@ public interface ILogic {
     // ILogic can operate with ILogic types only
     ILogic and(ILogic operand);
     ILogic or(ILogic operand);
+    ILogic neg();
 
     // section
 

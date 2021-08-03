@@ -1,6 +1,7 @@
 package types.Numbers;
 
 import types.AbstractType;
+import types.IType;
 import types.ScrabbleString;
 
 import java.util.Objects;
@@ -236,6 +237,69 @@ public class ScrabbleInt extends AbstractType implements INumber, IBinOperand {
         ScrabbleInt sDivide_int = new ScrabbleInt(divide);
         return sDivide_int.to_Binary();
     }
+
+    // section
+
+
+
+    // section - DD NODE OPERATIONS
+
+    @Override
+    public IType nAdd(IType adds) {
+        if (!(adds instanceof INumber)) {
+            return null;
+        }
+        return (IType)this.add((INumber) adds);
+    }
+
+    @Override
+    public IType nSubtract(IType subtracts) {
+        if (!(subtracts instanceof INumber)) {
+            return null;
+        }
+        return (IType)this.subtract((INumber) subtracts);
+    }
+
+    @Override
+    public IType nMultiply(IType multiplies) {
+        if (!(multiplies instanceof INumber)) {
+            return null;
+        }
+        return (IType)this.multiply((INumber) multiplies);
+    }
+
+    @Override
+    public IType nDivide(IType divides) {
+        if (!(divides instanceof INumber)) {
+            return null;
+        }
+        return (IType)this.divide((INumber) divides);
+    }
+
+    @Override
+    public ScrabbleInt eval() {
+        return this;
+    }
+
+    // section
+
+
+
+    // section - COMPARETO
+
+    @Override
+    public int compareTo(INumber o) {
+        ScrabbleFloat type1 = this.to_Float();
+        ScrabbleFloat type2 = o.to_Float();
+
+        if (type1.getValue() > type2.getValue()) {
+            return 1;
+        }
+        else if (type1.getValue() < type2.getValue()) {
+            return -1;
+        }
+
+        return 0;    }
 
     // section
 

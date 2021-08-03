@@ -22,4 +22,36 @@ public abstract class AbstractType implements IType {
     // section
 
 
+
+    // section - NODE OPERATIONS
+
+
+    @Override
+    public IType nAdd(IType adds) {
+        return null;
+    }
+
+    @Override
+    public IType nSubtract(IType subtracts) {
+        return null;
+    }
+
+    @Override
+    public IType nMultiply(IType multiplies) {
+        return null;
+    }
+
+    @Override
+    public IType nDivide(IType divides) {
+        return null;
+    }
+
+    @Override
+    public IType eval() {
+        return this;
+    }
+
+    // section
+
+
 }

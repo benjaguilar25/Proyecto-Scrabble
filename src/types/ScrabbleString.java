@@ -4,6 +4,7 @@ package types;
 // ScrabbleString type extends the AbstractType abstract class which means
 // this type can be transformed and added the same way as any IType (every type)
 
+import types.Numbers.ScrabbleBinary;
 import types.Numbers.ScrabbleFloat;
 
 import java.util.Objects;
@@ -68,6 +69,23 @@ public class ScrabbleString extends AbstractType {
     // returns the same type => ScrabbleString(String concatenatedStrings)
     public ScrabbleString stringAdd(ScrabbleString add) {
         return new ScrabbleString(add.getValue() + this.getValue());
+    }
+
+    // section
+
+
+
+    // section - DD NODE OPERATIONS
+
+
+    @Override
+    public IType nAdd(IType adds) {
+        return this.add(adds);
+    }
+
+    @Override
+    public ScrabbleString eval() {
+        return this;
     }
 
     // section

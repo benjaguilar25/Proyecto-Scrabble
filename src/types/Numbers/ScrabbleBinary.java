@@ -2,6 +2,7 @@ package types.Numbers;
 
 import operators.ILogic;
 import types.AbstractType;
+import types.IType;
 import types.ScrabbleBool;
 import types.ScrabbleString;
 
@@ -153,7 +154,8 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
         return operand.orBinary(this);
     }
 
-    public ScrabbleBinary neg() {
+    @Override
+    public ILogic neg() {
         return new ScrabbleBinary(this.neg_binary());
     }
 
@@ -370,6 +372,71 @@ public class ScrabbleBinary extends AbstractType implements INumber, IBinOperand
     }
 
     // section
+
+
+
+    // section - DD NODE OPERATIONS
+
+    @Override
+    public IType nAdd(IType adds) {
+        if (!(adds instanceof IBinOperand)) {
+            return null;
+        }
+        return (IType)this.add((IBinOperand) adds);
+    }
+
+    @Override
+    public IType nSubtract(IType subtracts) {
+        if (!(subtracts instanceof IBinOperand)) {
+            return null;
+        }
+        return (IType)this.subtract((IBinOperand)subtracts);
+    }
+
+    @Override
+    public IType nMultiply(IType multiplies) {
+        if (!(multiplies instanceof IBinOperand)) {
+            return null;
+        }
+        return (IType)this.multiply((IBinOperand)multiplies);
+    }
+
+    @Override
+    public IType nDivide(IType divides) {
+        if (!(divides instanceof IBinOperand)) {
+            return null;
+        }
+        return (IType)this.divide((IBinOperand)divides);
+    }
+
+    @Override
+    public ScrabbleBinary eval() {
+        return this;
+    }
+
+    // section
+
+
+
+    // section - COMPARETO
+
+    @Override
+    public int compareTo(INumber o) {
+        ScrabbleFloat type1 = this.to_Float();
+        ScrabbleFloat type2 = o.to_Float();
+
+        if (type1.getValue() > type2.getValue()) {
+            return 1;
+        }
+        else if (type1.getValue() < type2.getValue()) {
+            return -1;
+        }
+
+        return 0;
+    }
+
+    // section
+
 
 
 
